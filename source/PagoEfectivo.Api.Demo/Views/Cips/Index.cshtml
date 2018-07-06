@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Página de Inicio";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+Menú
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Inicio", "Index")</li>
+            <li>@Html.ActionLink("Generar Cip", "GenerarCip")</li>
+            <li>@Html.ActionLink("Consultar Cip", "ConsultarCip")</li>
+            <li>@Html.ActionLink("Actualizar Cip", "ActualizarCip")</li>
+            <li>@Html.ActionLink("Eliminar Cip", "EliminarCip")</li>
+        </ul>
+    </div>
+</nav>
+
+
+<p>PagoEfectivo ApiDemo</p>
