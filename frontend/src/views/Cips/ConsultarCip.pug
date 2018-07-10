@@ -1,0 +1,80 @@
+| @{
+| ViewData["Title"] = "Página ConsultarCip";
+| Layout = "~/Views/Shared/_Layout.cshtml"; 
+| }
+div.header-custom
+  button#sidebarCollapse.btn.btn-outline-warning(type='button')
+    div.menu-icon
+    div.menu-icon
+    div.menu-icon
+  span.header-title
+    | Consultar CIP
+//- nav.navbar.navbar-expand-lg.navbar-light.bg-light
+//-           .container-fluid
+//-             p.font-weight-bold
+//-               | Consultar CIP
+//-           .container-fluid
+//-             button#sidebarCollapse.btn.btn-info(type='button')
+//-               i.fas.fa-align-left
+//-               span Toggle Sidebar
+div.content-main   
+  | @using(Html.BeginForm()){    
+  .form-group
+    label(for='firstInput') Número de CIP:
+    input#email.form-control(type='text')
+  | }  
+
+  .form-group
+    label(for='firstInput') Número de CIP:
+    input#email.form-control(type='text')
+  button.btn.btn-default(type='submit', onClick='searchCip()') Consultarx
+  br
+  br
+  .card
+    .card-body
+      label.font-weight-bold(for='firstInput') Response
+      br
+      .form-group
+          label(for='firstInput') Code:
+          input#email.form-control(type='text')
+      .form-group
+          label(for='firstInput') Message:
+          input#email.form-control(type='text')
+      .form-group
+          label(for='firstInput') Data:
+          pre: code#code
+        
+          
+
+script.
+  var response = {
+      "code": 502,
+      "message": "Consulta exitosa.",
+      "data": [
+          {
+              "cip": 2495383,
+              "transactionCode": "1004649",
+              "amount": 22,
+              "currency": "PEN",
+              "status": 23,
+              "statusName": "Pagado",
+              "dateCreation": "2017-06-19T10:53:02.053-05:00",
+              "dateExpiry": "2017-06-22T17:00:00-05:00",
+              "datePayment": "2017-06-19T10:54:16.007-05:00",
+              "dateRemoval": "1900-01-01T00:00:00-05:00"
+          }
+      ]
+  }
+
+  function searchCip(){
+    console.log(getCookie('servicesId'), getCookie('accessKey'));
+    console.log(response.code, response.message, response.data)
+    var str = JSON.stringify(response.data, null, 2);
+    $('#code').text(str);
+     $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+  }
+
+  
+    

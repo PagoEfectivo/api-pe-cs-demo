@@ -1,0 +1,69 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title PagoEfectivo
+    environment(include='Development')
+      link(rel='stylesheet', href='~/lib/bootstrap/dist/css/bootstrap.min.css')
+      link(rel='stylesheet', href='~/css/main.css')
+  body
+    .wrapper
+      nav#sidebar
+        .sidebar-header
+          img.logo_desktop(src='http://pagoefectivo.pe/pe/../wp-content/themes/Avada/assets/images/logo_pe.png', width='220', style='width:220px !important;')
+        ul.list-unstyled.components
+          p Servicios
+          li
+            a.elements(href='/Cips/GenerarCip')
+              span Generar CIP
+          li
+            a.elements(href='/Cips/ConsultarCip') Consultar CIP
+          li
+            a.elements(href='/Cips/EliminarCip') Eliminar CIP
+          li
+            a.elements(href='/Cips/ActualizarCip') Actualizar CIP
+          li
+            a.elements(href='/') Configuración
+          //- li.active
+          //-   a.dropdown-toggle(href='#homeSubmenu', data-toggle='collapse', aria-expanded='false') Home
+          //-   ul#homeSubmenu.collapse.list-unstyled
+          //-     li
+          //-       a(href='#') Home 1
+          //-     li
+          //-       a(href='#') Home 2
+          //-     li
+          //-       a(href='#') Home 3
+      #content
+        | @RenderBody()
+    environment(names='Development')
+      link(rel='stylesheet', href='~/lib/highlight.js/styles/darkula.css')
+    environment(names='Development')
+      script(src='~/lib/jquery/dist/jquery.slim.min.js')
+      script(src='~/lib/popper.js/dist/umd/popper.min.js')
+      script(src='~/lib/bootstrap/dist/js/bootstrap.min.js')
+      script(src='~/lib/highlight.js/lib/highlight.js')
+      //- script(src='~/lib/highlight.js/lib/languages/json.js')
+      script.
+          hljs.configure({
+            useBR: false
+          });
+        hljs.initHighlightingOnLoad();
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+        function getCookie(name) {
+          var value = "; " + document.cookie;
+          var parts = value.split("; " + name + "=");
+          if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        function setCookie(name, value){
+          document.cookie = name + "=" + value;
+        }
+    |     @RenderSection("Scripts", required: false)

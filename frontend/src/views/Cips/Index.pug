@@ -1,0 +1,42 @@
+| @{
+| ViewData["Title"] = "Página de Inicio";
+| Layout = "~/Views/Shared/_Layout.cshtml"; 
+| }
+//- form(action='/')
+div.header-custom
+  button#sidebarCollapse.btn.btn-outline-warning(type='button')
+    div.menu-icon
+    div.menu-icon
+    div.menu-icon
+  span.header-title
+    | Configuracion CIP
+div.content-main               
+  .row
+      .col-sm-6
+        .form-group
+          label(for='serviceId') ID de servicio:
+          input#serviceId.form-control(type='text')
+  .row
+      .col-sm-6
+        .form-group
+          label(for='accessKey') Access key:
+          input#accessKey.form-control(type='password')
+  .row
+  
+      .col-sm-6
+        .form-group
+          label(for='secretKey') Secret key:
+          input#accessKey.form-control(type='password')
+  button.btn.btn-default(type='submit', onclick='credentialRegister()') Registrar
+  br
+
+script.
+  function credentialRegister(){
+    var serviceId = document.getElementById("serviceId");
+    var accessKey = document.getElementById("accessKey");
+    var secretKey = document.getElementById("secretKey");
+    setCookie("servicesId", serviceId.value);
+    setCookie("accessKey", accessKey.value);
+    setCookie("accessKey", secretKey.value);
+  }
+
