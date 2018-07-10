@@ -1,0 +1,15 @@
+doctype html
+html
+  head
+    meta(name='viewport', content='width=device-width')
+    title Layout Example
+    environment(names='Development')
+      link(rel='stylesheet', href='~/wwwroot/lib/bootstrap/dist/css/bootstrap.css')
+  body
+    #header
+
+    #content @RenderBody()
+    div @RenderSection("Test", required: false)
+    #Footer
+      p This is Footer
+    | @RenderSection("scripts", required: false)
