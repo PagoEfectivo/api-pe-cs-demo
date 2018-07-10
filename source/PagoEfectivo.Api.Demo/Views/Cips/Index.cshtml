@@ -1,22 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Página de Inicio";
+
+@{
+ViewData["Title"] = "Página de Inicio";
+Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-
-Menú
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
-            <li>@Html.ActionLink("Inicio", "Index")</li>
-            <li>@Html.ActionLink("Generar Cip", "GenerarCip")</li>
-            <li>@Html.ActionLink("Consultar Cip", "ConsultarCip")</li>
-            <li>@Html.ActionLink("Actualizar Cip", "ActualizarCip")</li>
-            <li>@Html.ActionLink("Eliminar Cip", "EliminarCip")</li>
-        </ul>
+<div class="header-custom">
+  <button class="btn btn-outline-warning" id="sidebarCollapse" type="button">
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+  </button><span class="header-title">Configuracion CIP</span>
+</div>
+<div class="content-main">              
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="serviceId">ID de servicio:</label>
+        <input class="form-control" id="serviceId" type="text">
+      </div>
     </div>
-</nav>
-
-
-<p>PagoEfectivo ApiDemo</p>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="accessKey">Access key:</label>
+        <input class="form-control" id="accessKey" type="password">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="secretKey">Secret key:</label>
+        <input class="form-control" id="secretKey" type="password">
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-default" type="submit" onclick="credentialRegister()">Registrar</button><br>
+</div>
+<script>
+  function credentialRegister(){
+    var serviceId = document.getElementById("serviceId");
+    var accessKey = document.getElementById("accessKey");
+    var secretKey = document.getElementById("secretKey");
+    setCookie("serviceId", serviceId.value);
+    setCookie("accessKey", accessKey.value);
+    setCookie("secretKey", secretKey.value);
+  }
+</script>
