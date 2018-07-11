@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const stylusLoader = require('stylus-loader')
 const fs = require('fs')
 
 function generateHtmlPlugins (templateDir, nameFile) {
@@ -24,7 +25,7 @@ const htmlPlugins = generateHtmlPlugins('./src/views/','Cips/')
 module.exports = {
   watch:true,
   resolve: {
-      extensions: ['.js','.ts','.pug']
+      extensions: ['.js','.ts','.pug','.styl']
   },
   module: {
     rules: [
@@ -35,6 +36,14 @@ module.exports = {
           pretty: true,
           name: '[name].[ext]'
         }
+      },
+      {
+        test: /\.styl|\.css$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            'stylus-loader'
+          ]
       }
     ]
   },
@@ -57,7 +66,7 @@ module.exports = {
           from: 'node_modules/popper.js/',
           to: '../../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/'
         }
-      ])
+      ]) 
   ]
   .concat(htmlPluginsShared)
   .concat(htmlPlugins)

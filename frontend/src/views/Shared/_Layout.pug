@@ -1,15 +1,27 @@
 doctype html
-html
+html(lang='en')
   head
-    meta(name='viewport', content='width=device-width')
-    title Layout Example
-    environment(names='Development')
-      link(rel='stylesheet', href='~/wwwroot/lib/bootstrap/dist/css/bootstrap.css')
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title PagoEfectivo
+    environment(include='Development')
+      link(rel='stylesheet', href='~/lib/bootstrap/dist/css/bootstrap.min.css')
+      link(rel='stylesheet', href='~/css/site.css')
   body
-    #header
-
-    #content @RenderBody()
-    div @RenderSection("Test", required: false)
-    #Footer
-      p This is Footer
-    | @RenderSection("scripts", required: false)
+    |
+    | @Html.Partial("~/Views/Shared/_navbar.cshtml")
+    .container
+      | @RenderBody()
+      hr
+      footer
+        p © 2016 - PagoEfectivo
+    environment(names='Development')
+      script(src='~/lib/jquery/dist/jquery.slim.min.js')
+      script(src='~/lib/popper.js/dist/umd/popper.min.js')
+      script(src='~/lib/bootstrap/dist/js/bootstrap.min.js')
+      script(src='~/js/site.js', asp-append-version='true')
+    |     @RenderSection("Scripts", required: false)

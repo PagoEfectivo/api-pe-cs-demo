@@ -2,7 +2,23 @@
 | ViewData["Title"] = "Página GenerarCip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-h2 @ViewData["Title"]
-h3 @ViewData["Message"]
-| @Html.ActionLink("Inicio", "Index")
-p PagoEfectivo ApiDemo
+
+form(action='/')
+  .form-group
+    label(for='firstInput') First Input:
+    input#email.form-control(type='text')
+  .form-group
+    label(for='secondInput') Second Input:
+    input#pwd.form-control(type='text')
+  button.btn.btn-default(type='submit') Enviar
+br
+.card
+  .card-body
+    | This is some text within a card body.
+
+
+
+
+
+
+

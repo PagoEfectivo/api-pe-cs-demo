@@ -1,14 +1,11 @@
-include ../_mixins/mixin.pug
-
-
 | @{
 | ViewData["Title"] = "Página de Inicio";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-
 h2 @ViewData["Title"]
 h3 @ViewData["Message"]
 | Menú
+| @*
 nav.navbar.navbar-inverse.navbar-fixed-top
   .navbar-collapse.collapse
     ul.nav.navbar-nav
@@ -17,21 +14,5 @@ nav.navbar.navbar-inverse.navbar-fixed-top
       li @Html.ActionLink("Consultar Cip", "ConsultarCip")
       li @Html.ActionLink("Actualizar Cip", "ActualizarCip")
       li @Html.ActionLink("Eliminar Cip", "EliminarCip")
-
-.dropdown
-  button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='true')
-    | Dropdown
-    span.caret
-  ul.dropdown-menu(aria-labelledby='dropdownMenu1')
-    li
-      a(href='#') Action
-    li
-      a(href='#') Another action
-    li
-      a(href='#') Something else here
-    li.divider(role='separator')
-    li
-      a(href='#') Separated link
-
-
+| *@
 p PagoEfectivo ApiDemo

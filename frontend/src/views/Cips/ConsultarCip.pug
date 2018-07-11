@@ -2,7 +2,22 @@
 | ViewData["Title"] = "Página ConsultarCip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-h2 @ViewData["Title"]
-h3 @ViewData["Message"]
-| @Html.ActionLink("Inicio", "Index")
-p PagoEfectivo ApiDemo
+form(action='/')
+  .form-group
+    label(for='firstInput') Número de CIP:
+    input#email.form-control(type='text')
+  button.btn.btn-default(type='submit') Consultar
+
+br
+.card
+  .card-body
+    .form-group
+        label(for='firstInput') Código:
+        input#email.form-control(type='text')
+    .form-group
+        label(for='firstInput') Mensaje:
+        input#email.form-control(type='text')
+    .form-group
+        pre
+            code
+    
