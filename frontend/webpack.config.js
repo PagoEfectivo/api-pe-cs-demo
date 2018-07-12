@@ -12,7 +12,7 @@ function generateHtmlPlugins (templateDir, nameFile) {
     const name = parts[0]
     const extension = parts[1]
     return new HtmlWebpackPlugin({
-      filename: `../../source/pagoEfectivo.Api.Demo/Views/${nameFile}/${name}.cshtml`,
+      filename: `../source/pagoEfectivo.Api.Demo/Views/${nameFile}/${name}.cshtml`,
       inject: false,
       template: path.resolve(__dirname, `${templateDir}/${nameFile}/${name}.${extension}`)
     })
@@ -23,7 +23,7 @@ const htmlPluginsShared = generateHtmlPlugins('./src/views/','Shared/')
 const htmlPlugins = generateHtmlPlugins('./src/views/','Cips/')
 
 module.exports = {
-  entry: ['./src/index.js', './src/style/test.scss'],
+  entry: ['./src/index.js', './src/styles/main.scss'],
   output: {
       path: path.resolve(__dirname, "./"),
       filename: "bundle.js"
@@ -74,7 +74,7 @@ module.exports = {
         }
       ]),
       new ExtractTextPlugin({ 
-        filename: 'dist/[name].bundle.css',
+        filename: '../source/pagoEfectivo.Api.Demo/wwwroot/css/[name].css',
         allChunks: true,
       }),
   ]
