@@ -3,18 +3,37 @@
 ViewData["Title"] = "Página de Inicio";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>Menú
-@*
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-      <li>@Html.ActionLink("Inicio", "Index")</li>
-      <li>@Html.ActionLink("Generar Cip", "GenerarCip")</li>
-      <li>@Html.ActionLink("Consultar Cip", "ConsultarCip")</li>
-      <li>@Html.ActionLink("Actualizar Cip", "ActualizarCip")</li>
-      <li>@Html.ActionLink("Eliminar Cip", "EliminarCip")</li>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <p class="font-weight-bold">Configuración de usuario</p>
   </div>
-</nav>*@
-<p>PagoEfectivo ApiDemo</p>
+  <div class="container-fluid">
+    <button class="btn btn-info" id="sidebarCollapse" type="button"><i class="fas fa-align-left"></i><span>Toggle Sidebar</span></button>
+  </div>
+</nav>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="serviceId">ID de servicio:</label>
+      <input class="form-control" id="serviceId" type="text">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="accessKey">Access key:</label>
+      <input class="form-control" id="accessKey" type="password">
+    </div>
+  </div>
+</div>
+<button class="btn btn-default" type="submit" onclick="credentialRegister()">Registrar</button><br>
+<script>
+  function credentialRegister(){
+    var serviceId = document.getElementById("serviceId");
+    var accessKey = document.getElementById("accessKey");
+    setCookie("servicesId", serviceId.value);
+    setCookie("accessKey", accessKey.value);
+    console.log(getCookie('servicesId'), getCookie('accessKey'));
+  }
+</script>

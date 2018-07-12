@@ -2,6 +2,14 @@
 | ViewData["Title"] = "Página ConsultarCip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+          .container-fluid
+            p.font-weight-bold
+              | Consultar CIP
+          .container-fluid
+            button#sidebarCollapse.btn.btn-info(type='button')
+              i.fas.fa-align-left
+              span Toggle Sidebar
 form(action='/')
   .form-group
     label(for='firstInput') Número de CIP:
@@ -12,12 +20,12 @@ br
 .card
   .card-body
     .form-group
-        label(for='firstInput') Código:
+        label(for='firstInput') Code:
         input#email.form-control(type='text')
     .form-group
-        label(for='firstInput') Mensaje:
+        label(for='firstInput') Message:
         input#email.form-control(type='text')
     .form-group
-        pre
-            code
+        label(for='firstInput') Data:
+        input#email.form-control(type='text')
     

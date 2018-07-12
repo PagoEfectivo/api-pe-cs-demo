@@ -10,23 +10,43 @@
     <title>PagoEfectivo</title>
     <environment include="Development">
       <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
-      <link rel="stylesheet" href="~/css/site.css">
+      <link rel="stylesheet" href="~/css/main.css">
     </environment>
   </head>
   <body>
-    
-    @Html.Partial("~/Views/Shared/_navbar.cshtml")
-    <div class="container">@RenderBody()
-      <hr>
-      <footer>
-        <p>© 2016 - PagoEfectivo</p>
-      </footer>
+    <div class="wrapper">
+      <nav id="sidebar">
+        <div class="sidebar-header"><img class="logo_desktop" src="http://pagoefectivo.pe/pe/../wp-content/themes/Avada/assets/images/logo_pe.png" width="220" style="width:220px !important;"></div>
+        <ul class="list-unstyled components">
+          <p>Servicios</p>
+          <li><a class="elements" href="/Cips/GenerarCip"><span>Generar CIP</span></a></li>
+          <li><a class="elements" href="/Cips/ConsultarCip">Consultar CIP</a></li>
+          <li><a class="elements" href="/Cips/EliminarCip">Eliminar CIP</a></li>
+          <li><a class="elements" href="/Cips/ActualizarCip">Actualizar CIP</a></li>
+          <li><a class="elements" href="/">Configuración</a></li>
+        </ul>
+      </nav>
+      <div id="content">@RenderBody()</div>
     </div>
     <environment names="Development">
       <script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
       <script src="~/lib/popper.js/dist/umd/popper.min.js"></script>
       <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-      <script src="~/js/site.js" asp-append-version="true"></script>
+      <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+        function getCookie(name) {
+          var value = "; " + document.cookie;
+          var parts = value.split("; " + name + "=");
+          if (parts.length == 2) return parts.pop().split(";").shift();
+        }
+        function setCookie(name, value){
+          document.cookie = name + "=" + value;
+        }
+      </script>
     </environment>    @RenderSection("Scripts", required: false)
   </body>
 </html>

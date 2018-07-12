@@ -262,3 +262,4 @@ __pycache__/
 
 frontend/node_modules
 frontend/dist.keep
+source/PagoEfectivo.Api.Demo/wwwroot/

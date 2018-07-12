@@ -3,6 +3,14 @@
 ViewData["Title"] = "Página ConsultarCip";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <p class="font-weight-bold">Consultar CIP</p>
+  </div>
+  <div class="container-fluid">
+    <button class="btn btn-info" id="sidebarCollapse" type="button"><i class="fas fa-align-left"></i><span>Toggle Sidebar</span></button>
+  </div>
+</nav>
 <form action="/">
   <div class="form-group">
     <label for="firstInput">Número de CIP:</label>
@@ -13,15 +21,16 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 <div class="card">
   <div class="card-body">
     <div class="form-group">
-      <label for="firstInput">Código:</label>
+      <label for="firstInput">Code:</label>
       <input class="form-control" id="email" type="text">
     </div>
     <div class="form-group">
-      <label for="firstInput">Mensaje:</label>
+      <label for="firstInput">Message:</label>
       <input class="form-control" id="email" type="text">
     </div>
     <div class="form-group">
-      <pre><code></code></pre>
+      <label for="firstInput">Data:</label>
+      <input class="form-control" id="email" type="text">
     </div>
   </div>
 </div>
