@@ -1,12 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const extractSass = new ExtractTextPlugin({
-  filename: "[name].[contenthash].css",
-  disable: process.env.NODE_ENV === "development"
-});
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const fs = require('fs')
 
 function generateHtmlPlugins (templateDir, nameFile) {
@@ -27,10 +23,10 @@ const htmlPluginsShared = generateHtmlPlugins('./src/views/','Shared/')
 const htmlPlugins = generateHtmlPlugins('./src/views/','Cips/')
 
 module.exports = {
-  entry: require.resolve("./src/style/test.sass"),
+  entry: ['./src/index.js', './src/style/test.scss'],
   output: {
-      path: path.resolve(__dirname, "../output"),
-      filename: "bundle.extractText.js"
+      path: path.resolve(__dirname, "./"),
+      filename: "bundle.js"
   },
   watch:true,
   resolve: {
@@ -46,13 +42,14 @@ module.exports = {
           name: '[name].[ext]'
         }
       },
-      {
-        test: /\.scss$/,
-        use: [
-            "style-loader", // creates style nodes from JS strings
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS
-        ]
+      { 
+        test: /\.(css|scss)$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            'css-loader',
+            'sass-loader'
+          ],
+        })
       }
     ]
   },
@@ -76,6 +73,10 @@ module.exports = {
           to: '../../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/'
         }
       ]),
+      new ExtractTextPlugin({ 
+        filename: 'dist/[name].bundle.css',
+        allChunks: true,
+      }),
   ]
   .concat(htmlPluginsShared)
   .concat(htmlPlugins)
