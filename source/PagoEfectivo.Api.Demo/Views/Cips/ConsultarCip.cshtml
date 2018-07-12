@@ -1,7 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Página ConsultarCip";
+
+@{
+ViewData["Title"] = "Página ConsultarCip";
+Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
-@Html.ActionLink("Inicio", "Index")
-<p>PagoEfectivo ApiDemo</p>
+<form action="/">
+  <div class="form-group">
+    <label for="firstInput">Número de CIP:</label>
+    <input class="form-control" id="email" type="text">
+  </div>
+  <button class="btn btn-default" type="submit">Consultar</button>
+</form><br>
+<div class="card">
+  <div class="card-body">
+    <div class="form-group">
+      <label for="firstInput">Código:</label>
+      <input class="form-control" id="email" type="text">
+    </div>
+    <div class="form-group">
+      <label for="firstInput">Mensaje:</label>
+      <input class="form-control" id="email" type="text">
+    </div>
+    <div class="form-group">
+      <pre><code></code></pre>
+    </div>
+  </div>
+</div>
