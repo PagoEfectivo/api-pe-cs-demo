@@ -3,6 +3,62 @@
 ViewData["Title"] = "Página EliminarCip";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>@Html.ActionLink("Inicio", "Index")
-<p>PagoEfectivo ApiDemo</p>
+<div class="header-custom">
+  <button class="btn btn-outline-warning" id="sidebarCollapse" type="button">
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+  </button><span class="header-title">Eliminar CIP</span>
+</div>
+<div class="content-main">             
+  <div class="form-group">
+    <label for="firstInput">Número de CIP:</label>
+    <input class="form-control" id="email" type="text">
+  </div>
+  <ton class="btn btn-default" type="submit" onClick="searchCip()">Consultar</ton><br><br>
+  <div class="card"></div>
+  <div class="card-body">
+    <label class="font-weight-bold" for="firstInput">Response</label><br>
+    <div class="form-group">
+      <label for="firstInput">Code:</label>
+      <input class="form-control" id="email" type="text">
+    </div>
+    <div class="form-group">
+      <label for="firstInput">Message:</label>
+      <input class="form-control" id="email" type="text">
+    </div>
+    <div class="form-group">
+      <label for="firstInput">Data:</label>
+      <pre><code id="code"></code></pre>
+    </div>
+  </div>
+</div>
+<script>
+  var response = {
+      "code": 502,
+      "message": "Consulta exitosa.",
+      "data": [
+          {
+              "cip": 2495383,
+              "transactionCode": "1004649",
+              "amount": 22,
+              "currency": "PEN",
+              "status": 23,
+              "statusName": "Pagado",
+              "dateCreation": "2017-06-19T10:53:02.053-05:00",
+              "dateExpiry": "2017-06-22T17:00:00-05:00",
+              "datePayment": "2017-06-19T10:54:16.007-05:00",
+              "dateRemoval": "1900-01-01T00:00:00-05:00"
+          }
+      ]
+  }
+  
+  function searchCip(){
+    console.log(response.code, response.message, response.data)
+    var str = JSON.stringify(response.data, null, 2);
+    $('#code').text(str);
+     $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+  }
+</script>

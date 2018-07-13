@@ -3,17 +3,26 @@
 ViewData["Title"] = "Página GenerarCip";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-<form action="/">
-  <div class="form-group">
-    <label for="firstInput">First Input:</label>
-    <input class="form-control" id="email" type="text">
+<div class="header-custom">
+  <button class="btn btn-outline-warning" id="sidebarCollapse" type="button">
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+    <div class="menu-icon"></div>
+  </button><span class="header-title">Generar CIP</span>
+</div>
+<div class="content-main">          
+  <form action="/">
+    <div class="form-group">
+      <label for="firstInput">First Input:</label>
+      <input class="form-control" id="email" type="text">
+    </div>
+    <div class="form-group">
+      <label for="secondInput">Second Input:</label>
+      <input class="form-control" id="pwd" type="text">
+    </div>
+    <button class="btn btn-default" type="submit">Enviar</button>
+  </form><br>
+  <div class="card">
+    <div class="card-body">This is some text within a card body.</div>
   </div>
-  <div class="form-group">
-    <label for="secondInput">Second Input:</label>
-    <input class="form-control" id="pwd" type="text">
-  </div>
-  <button class="btn btn-default" type="submit">Enviar</button>
-</form><br>
-<div class="card">
-  <div class="card-body">This is some text within a card body.</div>
 </div>

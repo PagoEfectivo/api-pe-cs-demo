@@ -41,11 +41,18 @@ html(lang='en')
       #content
         | @RenderBody()
     environment(names='Development')
+      link(rel='stylesheet', href='~/lib/highlight.js/styles/darkula.css')
+    environment(names='Development')
       script(src='~/lib/jquery/dist/jquery.slim.min.js')
       script(src='~/lib/popper.js/dist/umd/popper.min.js')
       script(src='~/lib/bootstrap/dist/js/bootstrap.min.js')
-      //- script(src='~/css/site.js', asp-append-version='true')
+      script(src='~/lib/highlight.js/lib/highlight.js')
+      //- script(src='~/lib/highlight.js/lib/languages/json.js')
       script.
+          hljs.configure({
+            useBR: false
+          });
+        hljs.initHighlightingOnLoad();
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');

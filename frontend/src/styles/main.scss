@@ -60,7 +60,7 @@ a {
     margin-left: -250px;
   }
   .sidebar-header {
-    padding: 20px;
+    padding: 10px;
     background: #FEC92F;
   }
   ul {
@@ -143,9 +143,26 @@ a {
 
 #content {
   width: 100%;
-  padding: 20px;
+  // padding: 20px;
   min-height: 100vh;
   transition: all 0.3s;
+  .content-main{
+    padding: 20px;
+  }
+}
+
+.header-custom {
+  background: #FEC92F;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  width: 30px;
+  height: 5px;
+  background-color: black;
+  margin: 4px 0;
 }
 
 @media (max-width: 768px) {

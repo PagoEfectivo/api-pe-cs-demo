@@ -2,19 +2,26 @@
 | ViewData["Title"] = "Página GenerarCip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-
-form(action='/')
-  .form-group
-    label(for='firstInput') First Input:
-    input#email.form-control(type='text')
-  .form-group
-    label(for='secondInput') Second Input:
-    input#pwd.form-control(type='text')
-  button.btn.btn-default(type='submit') Enviar
-br
-.card
-  .card-body
-    | This is some text within a card body.
+div.header-custom
+  button#sidebarCollapse.btn.btn-outline-warning(type='button')
+    div.menu-icon
+    div.menu-icon
+    div.menu-icon
+  span.header-title
+    | Generar CIP
+div.content-main           
+  form(action='/')
+    .form-group
+      label(for='firstInput') First Input:
+      input#email.form-control(type='text')
+    .form-group
+      label(for='secondInput') Second Input:
+      input#pwd.form-control(type='text')
+    button.btn.btn-default(type='submit') Enviar
+  br
+  .card
+    .card-body
+      | This is some text within a card body.
 
 
 
