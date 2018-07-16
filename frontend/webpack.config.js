@@ -61,16 +61,16 @@ module.exports = {
   plugins: [
       new CopyWebpackPlugin([
         {
-          from: 'node_modules/bootstrap/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/bootstrap/'
+          from: 'node_modules/bootstrap/dist/',
+          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/bootstrap/dist/'
         },
         {
-          from: 'node_modules/jquery/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/jquery/'
+          from: 'node_modules/jquery/dist',
+          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/jquery/dist'
         },
         {
-          from: 'node_modules/popper.js/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/'
+          from: 'node_modules/popper.js/dist/',
+          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/dist/'
         },
         {
           from: 'node_modules/highlight.js/',
