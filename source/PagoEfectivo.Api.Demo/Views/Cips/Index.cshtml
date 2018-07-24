@@ -31,7 +31,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="col-sm-6">
       <div class="form-group">
         <label for="secretKey">Secret key:</label>
-        <input class="form-control" id="accessKey" type="password">
+        <input class="form-control" id="secretKey" type="password">
       </div>
     </div>
   </div>
@@ -42,8 +42,8 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     var serviceId = document.getElementById("serviceId");
     var accessKey = document.getElementById("accessKey");
     var secretKey = document.getElementById("secretKey");
-    setCookie("servicesId", serviceId.value);
+    setCookie("serviceId", serviceId.value);
     setCookie("accessKey", accessKey.value);
-    setCookie("accessKey", secretKey.value);
+    setCookie("secretKey", secretKey.value);
   }
 </script>

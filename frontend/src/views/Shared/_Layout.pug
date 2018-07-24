@@ -11,6 +11,8 @@ html(lang='en')
     environment(include='Development')
       link(rel='stylesheet', href='~/lib/bootstrap/dist/css/bootstrap.min.css')
       link(rel='stylesheet', href='~/css/main.css')
+    environment(names='Development')
+      script(src='~/lib/jquery/dist/jquery.min.js')
   body
     .wrapper
       nav#sidebar
@@ -43,7 +45,6 @@ html(lang='en')
     environment(names='Development')
       link(rel='stylesheet', href='~/lib/highlight.js/styles/darkula.css')
     environment(names='Development')
-      script(src='~/lib/jquery/dist/jquery.slim.min.js')
       script(src='~/lib/popper.js/dist/umd/popper.min.js')
       script(src='~/lib/bootstrap/dist/js/bootstrap.min.js')
       script(src='~/lib/highlight.js/lib/highlight.js')

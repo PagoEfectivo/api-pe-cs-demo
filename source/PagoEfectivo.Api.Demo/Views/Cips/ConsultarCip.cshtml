@@ -1,4 +1,5 @@
 
+@model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 @{
 ViewData["Title"] = "Página ConsultarCip";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
@@ -11,16 +12,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </button><span class="header-title">Consultar CIP</span>
 </div>
 <div class="content-main">
-    @using(Html.BeginForm()){    
+    @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
+  {
   <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>
-    <input class="form-control" id="email" type="text">
-  </div>}  
-  <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>
-    <input class="form-control" id="email" type="text">
-  </div>
-  <button class="btn btn-default" type="submit" onClick="searchCip()">Consultar</button><br><br>
+    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control" })
+  </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+  @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  <button class="btn btn-default" type="submit">Consultar</button>}<br>
   <div class="card">
     <div class="card-body">
       <label class="font-weight-bold" for="firstInput">Response</label><br>
@@ -40,6 +39,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </div>
 </div>
 <script>
+  $(document).ready(function () {
+    $('#idService').val(getCookie('serviceId'));
+    $('#accessKey').val(getCookie('accessKey'));
+    $('#secretKey').val(getCookie('secretKey'));
+  })
   var response = {
       "code": 502,
       "message": "Consulta exitosa.",
@@ -60,7 +64,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   }
   
   function searchCip(){
-    console.log(getCookie('servicesId'), getCookie('accessKey'));
+    console.log(getCookie('serviceId'), getCookie('accessKey'));
     console.log(response.code, response.message, response.data)
     var str = JSON.stringify(response.data, null, 2);
     $('#code').text(str);

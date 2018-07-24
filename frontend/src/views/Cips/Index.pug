@@ -26,7 +26,7 @@ div.content-main
       .col-sm-6
         .form-group
           label(for='secretKey') Secret key:
-          input#accessKey.form-control(type='password')
+          input#secretKey.form-control(type='password')
   button.btn.btn-default(type='submit', onclick='credentialRegister()') Registrar
   br
 
@@ -35,8 +35,8 @@ script.
     var serviceId = document.getElementById("serviceId");
     var accessKey = document.getElementById("accessKey");
     var secretKey = document.getElementById("secretKey");
-    setCookie("servicesId", serviceId.value);
+    setCookie("serviceId", serviceId.value);
     setCookie("accessKey", accessKey.value);
-    setCookie("accessKey", secretKey.value);
+    setCookie("secretKey", secretKey.value);
   }
 
