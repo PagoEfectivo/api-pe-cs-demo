@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -34,29 +32,54 @@ namespace PagoEfectivo.Api.Demo.Controllers
         [Route("Cips/ConsultarCip")]
         public IActionResult ConsultarCip(CipViewModel model)
         {
-            ViewData["Message"] = "Bienvenidos a Consultar Cip.";
+            //ViewData["Message"] = "Bienvenidos a Consultar Cip.";
 
             if (model.Authenticate == null && model.Data == null)
                 return View();
             else
             {
+
                 var responseAuthz = AuthenticatePostAsync(model.Authenticate);
 
-                CipViewModel cip = new CipViewModel();
+                Type type = responseAuthz.GetType();
 
-                using (var client = new HttpClient())
+                if (type.Name == "AuthenticateResponse")
                 {
-                    client.BaseAddress = new Uri(responseAuthz.url);
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
+                    //string responseSearch = string.Empty;
+                    using (var client = new HttpClient())
+                    {
 
-                    string stringData = JsonConvert.SerializeObject(cip);
-                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = client.PostAsync("v1/cips/search", contentData).Result;
-                    ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                    var responseAuth = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
+                        client.BaseAddress = new Uri(responseAuthz.url);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
+
+                        var cip = new CipSearch();
+                        cip.Data = model.Data;
+
+                        string stringData = JsonConvert.SerializeObject(cip);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync("v1/cips/search", contentData).Result;
+                        HttpStatusCode httpStatusCode = response.StatusCode;
+
+                        if (response.IsSuccessStatusCode)
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        else
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                    }
+
+                    return View();
+                }
+                else
+                {
+                    ViewBag.response = responseAuthz;
+                    return View();
                 }
 
-                return View();
+                //CipSearch cip = new CipSearch();
+                //cip.Data.Add(model.Data[0]);
+                //List<Datum> Cips = new List<Datum>();
+
+
+
             }
         }
 
@@ -76,39 +99,57 @@ namespace PagoEfectivo.Api.Demo.Controllers
 
         public dynamic AuthenticatePostAsync(AuthenticateViewModel authenticateViewModel)
         {
-            var configBuilder = new ConfigurationBuilder()
+            try
+            {
+                var configBuilder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", false)
                     .Build();
 
-            var _url = configBuilder["Url"];
+                var _url = configBuilder["Url"];
 
-            var date = Convert.ToDateTime(DateTime.Now);
-            var DateNow = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, new TimeSpan(-5, 0, 0));
+                var date = Convert.ToDateTime(DateTime.Now);
+                var DateNow = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, new TimeSpan(-5, 0, 0));
 
-            Authenticate authorization = new Authenticate()
-            {
-                accessKey = authenticateViewModel.AccessKey,
-                idService = authenticateViewModel.IdService,
-                dateRequest = DateNow.ToString("yyyy-MM-ddTHH:mm:sszzz")
-            };
+                Authenticate authorization = new Authenticate()
+                {
+                    accessKey = authenticateViewModel.AccessKey,
+                    idService = authenticateViewModel.IdService,
+                    dateRequest = DateNow.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                };
 
-            var authRequest = authorization.idService.ToString() + "." + authorization.accessKey + "." + authenticateViewModel.SecretKey + "." + authorization.dateRequest;
+                var authRequest = authorization.idService.ToString() + "." + authorization.accessKey + "." + authenticateViewModel.SecretKey + "." + authorization.dateRequest;
 
-            authorization.hashString = Hash.HashString(authRequest);
+                authorization.hashString = Hash.HashString(authRequest);
 
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(_url);
-                string stringData = JsonConvert.SerializeObject(authorization);
-                var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                HttpResponseMessage response = client.PostAsync("v1/authorizations", contentData).Result;
-                ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                var responseAuth = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
-                responseAuth.url = _url;
-                return responseAuth;
-                //return response.Content.ReadAsStringAsync().Result;
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_url);
+                    string stringData = JsonConvert.SerializeObject(authorization);
+                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync("v1/authorizations", contentData).Result;
+                    HttpStatusCode httpStatusCode = response.StatusCode;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        dynamic responseAuth = JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
+                        responseAuth.url = _url;
+                        return responseAuth;
+                    }
+                    else
+                        return response.Content.ReadAsStringAsync().Result;
+                    //ViewBag.Message = response.Content.ReadAsStringAsync().Result;
+                    //dynamic responseAuth = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
+                    //responseAuth.url = _url;
+                    //return responseAuth;
+
+                    //return JsonConvert.DeserializeObject<TokenResultEntity.ResultValidate>(result);
+                }
             }
+            catch (Exception e)
+            {
+                return e.Message.ToString();
+            }
+
 
         }
 

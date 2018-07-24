@@ -1,7 +1,38 @@
-﻿@{
+﻿@model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel
+
+@{
     ViewData["Title"] = "Página ConsultarCip";
 }
+
+
+@using (Html.BeginForm("ConsultarCip", "Cips"))
+{
+    <label>AccessKey</label>
+    @Html.TextBoxFor(x => x.Authenticate.AccessKey)
+    <br />
+    <br />
+
+    <label>SecretKey</label>
+    @Html.TextBoxFor(x => x.Authenticate.SecretKey)
+    <br />
+    <br />
+
+    <label>IdService</label>
+    @Html.TextBoxFor(x => x.Authenticate.IdService)
+    <br />
+    <br />
+
+    <label>Cip</label>
+    @Html.TextBoxFor(x => x.Data[0].Cip)
+    <br />
+    <br />
+    <button type="submit">Enviar</button>
+}
+
+
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 @Html.ActionLink("Inicio", "Index")
+
+<p>Resultado: @ViewBag.response</p>
 <p>PagoEfectivo ApiDemo</p>

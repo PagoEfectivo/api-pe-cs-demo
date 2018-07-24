@@ -7,7 +7,7 @@ namespace PagoEfectivo.Api.Demo.Models.Entity
 {
     public class CipViewModel
     {
-        public CipData[] Data { get; set; }
+        public List<CipData> Data { get; set; }
         public AuthenticateViewModel Authenticate { get; set; }
         public CipResponse CipResponse { get; set; }
 
