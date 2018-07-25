@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PagoEfectivo.Api.Demo.Models.Entity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,47 +24,23 @@ namespace PagoEfectivo.Api.Demo.Controllers
         }
 
         [Route("Cips/GenerarCip")]
-        public IActionResult GenerarCip()
+        public IActionResult GenerarCip(CipViewModel model)
         {
-            ViewData["Message"] = "Bienvenidos a la Generación de Cip.";
-            return View();
-        }
-
-        [Route("Cips/ConsultarCip")]
-        public IActionResult ConsultarCip(CipViewModel model)
-        {
-            //ViewData["Message"] = "Bienvenidos a Consultar Cip.";
-
             if (model.Authenticate == null && model.Data == null)
                 return View();
             else
             {
-
                 var responseAuthz = AuthenticatePostAsync(model.Authenticate);
 
                 Type type = responseAuthz.GetType();
 
                 if (type.Name == "AuthenticateResponse")
                 {
-                    //string responseSearch = string.Empty;
                     using (var client = new HttpClient())
                     {
-
                         client.BaseAddress = new Uri(responseAuthz.url);
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
 
-                        var cip = new CipSearch();
-                        cip.Data = model.Data;
-
-                        string stringData = JsonConvert.SerializeObject(cip);
-                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                        HttpResponseMessage response = client.PostAsync("v1/cips/search", contentData).Result;
-                        HttpStatusCode httpStatusCode = response.StatusCode;
-
-                        if (response.IsSuccessStatusCode)
-                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
-                        else
-                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
                     }
 
                     return View();
@@ -73,28 +50,122 @@ namespace PagoEfectivo.Api.Demo.Controllers
                     ViewBag.response = responseAuthz;
                     return View();
                 }
+            }
+        }
 
-                //CipSearch cip = new CipSearch();
-                //cip.Data.Add(model.Data[0]);
-                //List<Datum> Cips = new List<Datum>();
+        [Route("Cips/ConsultarCip")]
+        public IActionResult ConsultarCip(CipViewModel model)
+        {
+            if (model.Authenticate == null && model.Data == null)
+                return View();
+            else
+            {
+                var responseAuthz = AuthenticatePostAsync(model.Authenticate);
 
+                Type type = responseAuthz.GetType();
 
+                if (type.Name == "AuthenticateResponse")
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(responseAuthz.url);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
 
+                        var cip = new CipSearch
+                        {
+                            Data = model.Data
+                        };
+
+                        string stringData = JsonConvert.SerializeObject(cip);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        HttpResponseMessage response = client.PostAsync("v1/cips/search", contentData).Result;
+                        var Code = StatusCode((int)response.StatusCode).StatusCode;
+                        var Status = response.StatusCode;
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
+                        else
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
+                    }
+
+                    return View();
+                }
+                else
+                {
+                    ViewBag.code = StatusCode((int)responseAuthz.StatusCode).StatusCode;
+                    ViewBag.status = responseAuthz.StatusCode;
+                    ViewBag.response = responseAuthz.Content.ReadAsStringAsync().Result;
+                    return View();
+                }
             }
         }
 
         [Route("Cips/ActualizarCip")]
-        public IActionResult ActualizarCip()
+        public IActionResult ActualizarCip(CipViewModel model)
         {
-            ViewData["Message"] = "Bienvenidos Actualizar Cip.";
-            return View();
+            if (model.Authenticate == null && model.Data == null)
+                return View();
+            else
+            {
+                var responseAuthz = AuthenticatePostAsync(model.Authenticate);
+
+                Type type = responseAuthz.GetType();
+
+                if (type.Name == "AuthenticateResponse")
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(responseAuthz.url);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
+
+                    }
+
+                    return View();
+                }
+                else
+                {
+                    ViewBag.response = responseAuthz;
+                    return View();
+                }
+            }
         }
 
         [Route("Cips/EliminarCip")]
-        public IActionResult EliminarCip()
+        public IActionResult EliminarCip(CipViewModel model)
         {
-            ViewData["Message"] = "Bienvenidos a Eliminar Cip.";
-            return View();
+            if (model.Authenticate == null && model.Data == null)
+                return View();
+            else
+            {
+                var responseAuthz = AuthenticatePostAsync(model.Authenticate);
+
+                Type type = responseAuthz.GetType();
+
+                if (type.Name == "AuthenticateResponse")
+                {
+                    using (var client = new HttpClient())
+                    {
+                        client.BaseAddress = new Uri(responseAuthz.url);
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
+
+                    }
+
+                    return View();
+                }
+                else
+                {
+                    ViewBag.response = responseAuthz;
+                    return View();
+                }
+            }
         }
 
         public dynamic AuthenticatePostAsync(AuthenticateViewModel authenticateViewModel)
@@ -128,7 +199,7 @@ namespace PagoEfectivo.Api.Demo.Controllers
                     string stringData = JsonConvert.SerializeObject(authorization);
                     var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                     HttpResponseMessage response = client.PostAsync("v1/authorizations", contentData).Result;
-                    HttpStatusCode httpStatusCode = response.StatusCode;
+                    
                     if (response.IsSuccessStatusCode)
                     {
                         dynamic responseAuth = JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
@@ -136,13 +207,7 @@ namespace PagoEfectivo.Api.Demo.Controllers
                         return responseAuth;
                     }
                     else
-                        return response.Content.ReadAsStringAsync().Result;
-                    //ViewBag.Message = response.Content.ReadAsStringAsync().Result;
-                    //dynamic responseAuth = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticateResponse>(response.Content.ReadAsStringAsync().Result);
-                    //responseAuth.url = _url;
-                    //return responseAuth;
-
-                    //return JsonConvert.DeserializeObject<TokenResultEntity.ResultValidate>(result);
+                        return response;
                 }
             }
             catch (Exception e)
@@ -152,7 +217,6 @@ namespace PagoEfectivo.Api.Demo.Controllers
 
 
         }
-
 
     }
 }
