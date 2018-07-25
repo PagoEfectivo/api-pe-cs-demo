@@ -1,4 +1,3 @@
-﻿@model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel
 
 @model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 @{
@@ -14,66 +13,49 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 <div class="content-main">
     @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
-  {
-  <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control" })
-  </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
-  @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
-  @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  <button class="btn btn-default" type="submit">Consultar</button>}<br>
-  <div class="card">
-    <div class="card-body">
-      <label class="font-weight-bold" for="firstInput">Response</label><br>
-      <div class="form-group">
-        <label for="firstInput">Code:</label>
-        <input class="form-control" id="email" type="text">
-      </div>
-      <div class="form-group">
-        <label for="firstInput">Message:</label>
-        <input class="form-control" id="email" type="text">
-      </div>
-      <div class="form-group">
-        <label for="firstInput">Data:</label>
-        <pre><code id="code"></code></pre>
-      </div>
+    {
+        <div class="form-group">
+            <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+        </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+        @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+        @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+        <button class="btn btn-default" type="submit">Consultar</button>}<br>
+    @if (@ViewBag.response != null)
+    {
+        <div class="card">
+                <div class="card-body">
+                    <label class="font-weight-bold" for="firstInput">Response</label><br>
+                    <div class="form-group">
+                        <label for="firstInput">Code:</label>
+                        <input class="form-control" id="email" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstInput">Message:</label>
+                        <input class="form-control" id="email" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstInput">Data:</label>
+                        <pre>
+                        <code id="code">
+                </code>
+            </pre>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var response = @(Html.Raw(ViewBag.response));
+                var str = JSON.stringify(response, null, 2);
+                $('#code').text(str);
+            </script>
+    }
     </div>
-  </div>
-</div>
-<script>
-  $(document).ready(function () {
-    $('#idService').val(getCookie('serviceId'));
-    $('#accessKey').val(getCookie('accessKey'));
-    $('#secretKey').val(getCookie('secretKey'));
-  })
-  var response = {
-      "code": 502,
-      "message": "Consulta exitosa.",
-      "data": [
-          {
-              "cip": 2495383,
-              "transactionCode": "1004649",
-              "amount": 22,
-              "currency": "PEN",
-              "status": 23,
-              "statusName": "Pagado",
-              "dateCreation": "2017-06-19T10:53:02.053-05:00",
-              "dateExpiry": "2017-06-22T17:00:00-05:00",
-              "datePayment": "2017-06-19T10:54:16.007-05:00",
-              "dateRemoval": "1900-01-01T00:00:00-05:00"
-          }
-      ]
-  }
-  
-  function searchCip(){
-    console.log(getCookie('serviceId'), getCookie('accessKey'));
-    console.log(response.code, response.message, response.data)
-    var str = JSON.stringify(response.data, null, 2);
-    $('#code').text(str);
-     $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-    });
-  }
-  
-  
+
     
+<script>
+    $(document).ready(function () {
+        $('#idService').val(getCookie('serviceId'));
+        $('#accessKey').val(getCookie('accessKey'));
+        $('#secretKey').val(getCookie('secretKey'));
+  })
+  
 </script>

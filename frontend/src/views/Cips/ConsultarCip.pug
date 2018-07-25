@@ -10,14 +10,6 @@ div.header-custom
     div.menu-icon
   span.header-title
     | Consultar CIP
-//- nav.navbar.navbar-expand-lg.navbar-light.bg-light
-//-           .container-fluid
-//-             p.font-weight-bold
-//-               | Consultar CIP
-//-           .container-fluid
-//-             button#sidebarCollapse.btn.btn-info(type='button')
-//-               i.fas.fa-align-left
-//-               span Toggle Sidebar
 
 div.content-main   
   | @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
@@ -30,7 +22,6 @@ div.content-main
   | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
   button.btn.btn-default(type='submit') Consultar
   | }
-
   br
   .card
     .card-body
@@ -45,6 +36,9 @@ div.content-main
       .form-group
           label(for='firstInput') Data:
           pre: code#code
+            //- | @if(@ViewBag.response=="undefined"){
+            //- @ViewBag.response
+            //- | }
         
 script.
   $(document).ready(function () {
