@@ -79,8 +79,6 @@ namespace PagoEfectivo.Api.Demo.Controllers
                         string stringData = JsonConvert.SerializeObject(cip);
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("v1/cips/search", contentData).Result;
-                        var Code = StatusCode((int)response.StatusCode).StatusCode;
-                        var Status = response.StatusCode;
 
                         if (response.IsSuccessStatusCode)
                         {
@@ -123,9 +121,27 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 {
                     using (var client = new HttpClient())
                     {
-                        client.BaseAddress = new Uri(responseAuthz.url);
+                        //client.BaseAddress = new Uri(responseAuthz.url);
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
 
+                        string stringData = JsonConvert.SerializeObject(model.DateExpiry);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");                                              
+                        var request = new HttpRequestMessage(new HttpMethod("PATCH"), responseAuthz.url+ "v1/cips/"+model.Data[0].Cip) { Content = contentData };
+                                                
+                        var response = client.SendAsync(request);
+
+                        //if (response.IsSuccessStatusCode)
+                        //{
+                        //    ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                        //    ViewBag.status = response.StatusCode;
+                        //    ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        //}
+                        //else
+                        //{
+                        //    ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                        //    ViewBag.status = response.StatusCode;
+                        //    ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        //}
                     }
 
                     return View();
@@ -148,14 +164,28 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 var responseAuthz = AuthenticatePostAsync(model.Authenticate);
 
                 Type type = responseAuthz.GetType();
-
+                                
                 if (type.Name == "AuthenticateResponse")
                 {
                     using (var client = new HttpClient())
                     {
                         client.BaseAddress = new Uri(responseAuthz.url);
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
+                                                
+                        HttpResponseMessage response = client.DeleteAsync("v1/cips/"+ model.Data[0].Cip).Result;
 
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
+                        else
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
                     }
 
                     return View();
