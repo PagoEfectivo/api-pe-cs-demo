@@ -60,22 +60,22 @@ module.exports = {
   },
   plugins: [
       new CopyWebpackPlugin([
-        {
-          from: 'node_modules/bootstrap/dist/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/bootstrap/dist/'
-        },
-        {
-          from: 'node_modules/jquery/dist',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/jquery/dist'
-        },
-        {
-          from: 'node_modules/popper.js/dist/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/dist/'
-        },
-        {
-          from: 'node_modules/highlight.js/',
-          to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/highlight.js/'
-        }
+        // {
+        //   from: 'node_modules/bootstrap/dist/',
+        //   to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/bootstrap/dist/'
+        // },
+        // {
+        //   from: 'node_modules/jquery/dist',
+        //   to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/jquery/dist'
+        // },
+        // {
+        //   from: 'node_modules/popper.js/dist/',
+        //   to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/popper.js/dist/'
+        // },
+        // {
+        //   from: 'node_modules/highlight.js/',
+        //   to: '../source/pagoEfectivo.Api.Demo/wwwroot/lib/highlight.js/'
+        // }
       ]),
       new ExtractTextPlugin({ 
         filename: '../source/pagoEfectivo.Api.Demo/wwwroot/css/[name].css',

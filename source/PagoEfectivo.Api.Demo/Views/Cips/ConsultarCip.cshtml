@@ -12,50 +12,42 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </button><span class="header-title">Consultar CIP</span>
 </div>
 <div class="content-main">
-    @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
-    {
-        <div class="form-group">
-            <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
-        </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
-        @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
-        @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-        <button class="btn btn-default" type="submit">Consultar</button>}<br>
-    @if (@ViewBag.response != null)
-    {
-        <div class="card">
-                <div class="card-body">
-                    <label class="font-weight-bold" for="firstInput">Response</label><br>
-                    <div class="form-group">
-                        <label for="firstInput">Code:</label>
-                        <input class="form-control" id="email" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="firstInput">Message:</label>
-                        <input class="form-control" id="email" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="firstInput">Data:</label>
-                        <pre>
-                        <code id="code">
-                </code>
-            </pre>
-                    </div>
-                </div>
-            </div>
-            <script>
-                var response = @(Html.Raw(ViewBag.response));
-                var str = JSON.stringify(response, null, 2);
-                $('#code').text(str);
-            </script>
-    }
+  @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
+  {
+  <div class="form-group">
+    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+  </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+          @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+          @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  <button class="btn btn-default" type="submit">Consultar</button>}<br>    @if (@ViewBag.response != null)
+      {
+  <div class="card">
+    <div class="card-body">
+      <label class="font-weight-bold" for="firstInput">Response</label><br>
+      <div class="form-group">
+        <label for="firstInput">Code:</label>
+        <input class="form-control" id="email" type="text" value="@ViewBag.code" readonly="">
+      </div>
+      <div class="form-group">
+        <label for="firstInput">Message:</label>
+        <input class="form-control" id="email" type="text" value="@ViewBag.status" readonly="">
+      </div>
+      <div class="form-group">
+        <label for="firstInput">Data:</label>
+        <pre><code id="code">                               </code></pre>
+      </div>
     </div>
-
-    
+  </div>
+  <script>
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
+    $('#code').text(str);
+  </script>    }
+</div>
 <script>
-    $(document).ready(function () {
-        $('#idService').val(getCookie('serviceId'));
-        $('#accessKey').val(getCookie('accessKey'));
-        $('#secretKey').val(getCookie('secretKey'));
+  $(document).ready(function () {
+  $('#idService').val(getCookie('serviceId'));
+  $('#accessKey').val(getCookie('accessKey'));
+  $('#secretKey').val(getCookie('secretKey'));
   })
-  
 </script>
