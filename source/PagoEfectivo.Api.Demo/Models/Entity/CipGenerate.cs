@@ -5,19 +5,11 @@ using System.Threading.Tasks;
 
 namespace PagoEfectivo.Api.Demo.Models.Entity
 {
-    public class CipViewModel
+    public class CipGenerate
     {
-        public List<CipData> Data { get; set; }
-        public AuthenticateViewModel Authenticate { get; set; }
         public string Currency { get; set; }
         public decimal Amount { get; set; }
         public string TransactionCode { get; set; }
         public string UserEmail { get; set; }
-        public DateTimeOffset DateExpiry { get; set; }        
     }
-    public class CipData
-    {
-        public long Cip { get; set; }
-    }
-
 }
