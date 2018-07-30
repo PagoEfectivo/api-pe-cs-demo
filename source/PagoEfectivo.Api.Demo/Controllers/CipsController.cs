@@ -1,12 +1,10 @@
 ﻿using System;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using PagoEfectivo.Api.Demo.Models.Entity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -148,42 +146,29 @@ namespace PagoEfectivo.Api.Demo.Controllers
                         client.BaseAddress = new Uri(responseAuthz.url);
                         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", responseAuthz.Data.Token);
 
-                        //string stringData = JsonConvert.SerializeObject(model.DateExpiry);
-                        //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");                                              
-                        //var request = new HttpRequestMessage(new HttpMethod("PATCH"), responseAuthz.url+ "v1/cips/"+model.Data[0].Cip) { Content = contentData };                                                
-                        //var response = client.SendAsync(request);
+                        var cip= new CipUpdate
+                        {
+                            DateExpiry = model.DateExpiry
+                        };
 
-                        string stringData = JsonConvert.SerializeObject(model.DateExpiry);
-                        //var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
-                        //var method = new HttpMethod("PATCH");
-                        //var request = new HttpRequestMessage(method, responseAuthz.url)
-                        //{
-                        //    Content = contentData
-                        //};
-                        //client.PostAsync("v1/cips/search", contentData).Result;
-                        //var response = client.SendAsync(request);
+                        string stringData = JsonConvert.SerializeObject(cip);
+                        var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                        var request = new HttpRequestMessage(new HttpMethod("PATCH"), responseAuthz.url + "v1/cips/" + model.Data[0].Cip) { Content = contentData };
+                        HttpResponseMessage response = client.SendAsync(request).Result;
                         
-                        //HttpRequestMessage request = new HttpRequestMessage
-                        //{
-                        //    Method = new HttpMethod("PATCH"),
-                        //    RequestUri = new Uri(responseAuthz.url),
-                        //    Content = contentData,
-                        //};
+                        if (response.IsSuccessStatusCode)
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
+                        else
+                        {
+                            ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                            ViewBag.status = response.StatusCode;
+                            ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                        }
 
-                        //return client.SendAsync(request);
-
-                        //if (response.IsSuccessStatusCode)
-                        //{
-                        //    ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
-                        //    ViewBag.status = response.StatusCode;
-                        //    ViewBag.response = response.Content.ReadAsStringAsync().Result;
-                        //}
-                        //else
-                        //{
-                        //    ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
-                        //    ViewBag.status = response.StatusCode;
-                        //    ViewBag.response = response.Content.ReadAsStringAsync().Result;
-                        //}
                     }
 
                     return View();
