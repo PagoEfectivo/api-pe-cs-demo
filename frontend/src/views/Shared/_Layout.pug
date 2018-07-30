@@ -11,6 +11,7 @@ html(lang='en')
     environment(include='Development')
       link(rel='stylesheet', href='~/lib/bootstrap/dist/css/bootstrap.min.css')
       link(rel='stylesheet', href='~/css/main.css')
+      link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
     environment(names='Development')
       script(src='~/lib/jquery/dist/jquery.min.js')
   body
@@ -44,11 +45,13 @@ html(lang='en')
         | @RenderBody()
     environment(names='Development')
       link(rel='stylesheet', href='~/lib/highlight.js/styles/darkula.css')
+      link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css')
     environment(names='Development')
       script(src='~/lib/popper.js/dist/umd/popper.min.js')
       script(src='~/lib/bootstrap/dist/js/bootstrap.min.js')
       script(src='~/lib/highlight.js/lib/highlight.js')
-      //- script(src='~/lib/highlight.js/lib/languages/json.js')
+      script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js')
+      script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js')
       script.
           hljs.configure({
             useBR: false

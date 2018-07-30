@@ -1,62 +1,61 @@
+| @model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 | @{
-| ViewData["Title"] = "Página ActualizarCip";
+| ViewData["Title"] = "Página Actualizar Cip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-div.header-custom
+.header-custom
   button#sidebarCollapse.btn.btn-outline-warning(type='button')
-    div.menu-icon
-    div.menu-icon
-    div.menu-icon
-  span.header-title
-    | Actualizar CIP
-div.content-main              
-    .form-group
-        label(for='firstInput') Número de CIP:
-        input#email.form-control(type='text')
-    button.btn.btn-default(type='submit', onClick='searchCip()') Consultar
-    br
-    br
-    .card
+    .menu-icon
+    .menu-icon
+    .menu-icon
+  span.header-title Actualizar CIP
+.content-main
+  | @using (Html.BeginForm("ActualizarCip", "Cips", FormMethod.Post))
+  | {
+  .form-group
+    label(for='firstInput') Número de CIP:
+    | @Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+  .form-group
+    label(for='firstInput') Fecha
+    .row
+      .col-sm-12
+        | @Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })
+      script(type='text/javascript').
+        $(function () {
+         $('#datetimepicker').datetimepicker({
+                locale: 'pt',
+                format: 'YYYY-MM-DDThh:mm:ssZ',
+            });
+        });
+  | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+  | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  button.btn.btn-default(type='submit') Actualizar
+  | }
+  br
+  |     @if (@ViewBag.response != null)
+  |     {
+  .card
     .card-body
-        label.font-weight-bold(for='firstInput') Response
-        br
-        .form-group
-            label(for='firstInput') Code:
-            input#email.form-control(type='text')
-        .form-group
-            label(for='firstInput') Message:
-            input#email.form-control(type='text')
-        .form-group
-            label(for='firstInput') Data:
-            pre: code#code
-        
-          
-
-script.
-  var response = {
-      "code": 502,
-      "message": "Consulta exitosa.",
-      "data": [
-          {
-              "cip": 2495383,
-              "transactionCode": "1004649",
-              "amount": 22,
-              "currency": "PEN",
-              "status": 23,
-              "statusName": "Pagado",
-              "dateCreation": "2017-06-19T10:53:02.053-05:00",
-              "dateExpiry": "2017-06-22T17:00:00-05:00",
-              "datePayment": "2017-06-19T10:54:16.007-05:00",
-              "dateRemoval": "1900-01-01T00:00:00-05:00"
-          }
-      ]
-  }
-
-  function searchCip(){
-    console.log(response.code, response.message, response.data)
-    var str = JSON.stringify(response.data, null, 2);
+      label.font-weight-bold(for='firstInput') Response
+      br
+      .form-group
+        label(for='firstInput') Code:
+        input#email.form-control(type='text', value='@ViewBag.code', readonly='')
+      .form-group
+        label(for='firstInput') Message:
+        input#email.form-control(type='text', value='@ViewBag.status', readonly='')
+      .form-group
+        label(for='firstInput') Data:
+        pre: code#code                                
+  script.
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
     $('#code').text(str);
-     $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-    });
-  }
+  |     }
+script.
+  $(document).ready(function () {
+  $('#idService').val(getCookie('serviceId'));
+  $('#accessKey').val(getCookie('accessKey'));
+  $('#secretKey').val(getCookie('secretKey'));
+  })

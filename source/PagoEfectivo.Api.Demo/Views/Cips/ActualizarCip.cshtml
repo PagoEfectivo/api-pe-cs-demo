@@ -1,6 +1,7 @@
 
+@model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 @{
-ViewData["Title"] = "Página ActualizarCip";
+ViewData["Title"] = "Página Actualizar Cip";
 Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 <div class="header-custom">
@@ -10,55 +11,57 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="menu-icon"></div>
   </button><span class="header-title">Actualizar CIP</span>
 </div>
-<div class="content-main">             
+<div class="content-main">
+  @using (Html.BeginForm("ActualizarCip", "Cips", FormMethod.Post))
+  {
   <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>
-    <input class="form-control" id="email" type="text">
+    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
   </div>
-  <button class="btn btn-default" type="submit" onClick="searchCip()">Consultar</button><br><br>
-  <div class="card"></div>
-  <div class="card-body">
-    <label class="font-weight-bold" for="firstInput">Response</label><br>
-    <div class="form-group">
-      <label for="firstInput">Code:</label>
-      <input class="form-control" id="email" type="text">
+  <div class="form-group">
+    <label for="firstInput">Fecha</label>
+    <div class="row">
+      <div class="col-sm-12">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
+      <script type="text/javascript">
+        $(function () {
+         $('#datetimepicker').datetimepicker({
+                locale: 'pt',
+                format: 'YYYY-MM-DDThh:mm:ssZ',
+            });
+        });
+      </script>
     </div>
-    <div class="form-group">
-      <label for="firstInput">Message:</label>
-      <input class="form-control" id="email" type="text">
-    </div>
-    <div class="form-group">
-      <label for="firstInput">Data:</label>
-      <pre><code id="code"></code></pre>
+  </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+  @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  <button class="btn btn-default" type="submit">Actualizar</button>}<br>    @if (@ViewBag.response != null)
+      {
+  <div class="card">
+    <div class="card-body">
+      <label class="font-weight-bold" for="firstInput">Response</label><br>
+      <div class="form-group">
+        <label for="firstInput">Code:</label>
+        <input class="form-control" id="email" type="text" value="@ViewBag.code" readonly="">
+      </div>
+      <div class="form-group">
+        <label for="firstInput">Message:</label>
+        <input class="form-control" id="email" type="text" value="@ViewBag.status" readonly="">
+      </div>
+      <div class="form-group">
+        <label for="firstInput">Data:</label>
+        <pre><code id="code">                               </code></pre>
+      </div>
     </div>
   </div>
+  <script>
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
+    $('#code').text(str);
+  </script>    }
 </div>
 <script>
-  var response = {
-      "code": 502,
-      "message": "Consulta exitosa.",
-      "data": [
-          {
-              "cip": 2495383,
-              "transactionCode": "1004649",
-              "amount": 22,
-              "currency": "PEN",
-              "status": 23,
-              "statusName": "Pagado",
-              "dateCreation": "2017-06-19T10:53:02.053-05:00",
-              "dateExpiry": "2017-06-22T17:00:00-05:00",
-              "datePayment": "2017-06-19T10:54:16.007-05:00",
-              "dateRemoval": "1900-01-01T00:00:00-05:00"
-          }
-      ]
-  }
-  
-  function searchCip(){
-    console.log(response.code, response.message, response.data)
-    var str = JSON.stringify(response.data, null, 2);
-    $('#code').text(str);
-     $('pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-    });
-  }
+  $(document).ready(function () {
+  $('#idService').val(getCookie('serviceId'));
+  $('#accessKey').val(getCookie('accessKey'));
+  $('#secretKey').val(getCookie('secretKey'));
+  })
 </script>
