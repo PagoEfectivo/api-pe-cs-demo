@@ -1,31 +1,62 @@
+| @model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 | @{
-| ViewData["Title"] = "Página GenerarCip";
+| ViewData["Title"] = "Página ConsultarCip";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
-div.header-custom
+.header-custom
   button#sidebarCollapse.btn.btn-outline-warning(type='button')
-    div.menu-icon
-    div.menu-icon
-    div.menu-icon
-  span.header-title
-    | Generar CIP
-div.content-main           
-  form(action='/')
-    .form-group
-      label(for='firstInput') First Input:
-      input#email.form-control(type='text')
-    .form-group
-      label(for='secondInput') Second Input:
-      input#pwd.form-control(type='text')
-    button.btn.btn-default(type='submit') Enviar
+    .menu-icon
+    .menu-icon
+    .menu-icon
+  span.header-title Generar CIP
+.content-main
+  | @using (Html.BeginForm("GenerarCip", "Cips", FormMethod.Post))
+  | {
+  .form-group
+    label(for='Currency') Tipo de moneda
+    | @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>
+    | {
+    | new SelectListItem() {Text = "PEN", Value="PEN"},
+    | new SelectListItem() {Text = "USD", Value="USD"}
+    | }, new { @id = "Amount", @class = "form-control"})
+  .form-group
+    label(for='Amount') Monto:
+    | @Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })
+  .form-group
+    label(for='TransactionCode') Codigo de transaccion:
+    | @Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
+  .form-group
+    label(for='UserEmail') Correo de usuario:
+    | @Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
+  | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
+  | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  button.btn.btn-default(type='submit') Generar
+  | }
   br
+  |     @if (@ViewBag.response != null)
+  |     {
   .card
     .card-body
-      | This is some text within a card body.
-
-
-
-
-
-
-
+      label.font-weight-bold(for='firstInput') Response
+      br
+      .form-group
+        label(for='firstInput') Code:
+        input#email.form-control(type='text', value='@ViewBag.code', readonly='')
+      .form-group
+        label(for='firstInput') Message:
+        input#email.form-control(type='text', value='@ViewBag.status', readonly='')
+      .form-group
+        label(for='firstInput') Data:
+        pre: code#code                                
+  script.
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
+    $('#code').text(str);
+  |     }
+script.
+  $(document).ready(function () {
+  $('#idService').val(getCookie('serviceId'));
+  $('#accessKey').val(getCookie('accessKey'));
+  $('#secretKey').val(getCookie('secretKey'));
+  })
