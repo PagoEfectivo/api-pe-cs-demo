@@ -44,7 +44,19 @@ namespace PagoEfectivo.Api.Demo.Controllers
                             Currency = model.Currency,
                             Amount = model.Amount,
                             TransactionCode =model.TransactionCode,
-                            UserEmail = model.UserEmail
+                            UserEmail = model.UserEmail,
+                            AdminEmail = model.AdminEmail,
+                            DateExpiry = model.DateExpiry,
+                            PaymentConcept = model.PaymentConcept,
+                            AdditionalData = model.AdditionalData,
+                            UserName = model.UserName,
+                            UserLastName = model.UserLastName,
+                            UserUbigeo = model.UserUbigeo,
+                            UserCountry = model.UserCountry,
+                            UserDocumentType = model.UserDocumentType,
+                            UserDocumentNumber = model.UserDocumentNumber,
+                            UserPhone = model.UserPhone,
+                            UserCodeCountry = model.UserCodeCountry
                         };
 
                         string stringData = JsonConvert.SerializeObject(cip);
