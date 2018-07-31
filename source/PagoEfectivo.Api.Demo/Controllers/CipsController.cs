@@ -81,7 +81,9 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 }
                 else
                 {
-                    ViewBag.response = responseAuthz;
+                    ViewBag.code = StatusCode((int)responseAuthz.StatusCode).StatusCode;
+                    ViewBag.status = responseAuthz.StatusCode;
+                    ViewBag.response = responseAuthz.Content.ReadAsStringAsync().Result;                    
                     return View();
                 }
             }
@@ -187,7 +189,9 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 }
                 else
                 {
-                    ViewBag.response = responseAuthz;
+                    ViewBag.code = StatusCode((int)responseAuthz.StatusCode).StatusCode;
+                    ViewBag.status = responseAuthz.StatusCode;
+                    ViewBag.response = responseAuthz.Content.ReadAsStringAsync().Result;
                     return View();
                 }
             }
@@ -231,7 +235,9 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 }
                 else
                 {
-                    ViewBag.response = responseAuthz;
+                    ViewBag.code = StatusCode((int)responseAuthz.StatusCode).StatusCode;
+                    ViewBag.status = responseAuthz.StatusCode;
+                    ViewBag.response = responseAuthz.Content.ReadAsStringAsync().Result;
                     return View();
                 }
             }
