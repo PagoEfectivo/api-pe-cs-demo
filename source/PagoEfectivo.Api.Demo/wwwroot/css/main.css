@@ -116,11 +116,19 @@ a.article {
   #content .content-main {
     padding: 20px; }
 
+#sidebarCollapseTitle {
+  display: none; }
+
 .header-custom {
   background: #FEC92F;
   min-height: 80px;
   display: flex;
   align-items: center; }
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 20px; }
 
 .menu-icon {
   width: 30px;
@@ -134,4 +142,6 @@ a.article {
     #sidebar.active {
       margin-left: 0; }
   #sidebarCollapse span {
-    display: none; } }
+    display: none; }
+  #sidebarCollapseTitle {
+    display: block; } }

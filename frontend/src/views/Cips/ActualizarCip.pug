@@ -4,7 +4,7 @@
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
 .header-custom
-  button#sidebarCollapse.btn.btn-outline-warning(type='button')
+  button#sidebarCollapseTitle.btn.btn-outline-warning(type='button')
     .menu-icon
     .menu-icon
     .menu-icon
@@ -16,7 +16,7 @@
     label(for='firstInput') Número de CIP:
     | @Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
   .form-group
-    label(for='firstInput') Fecha
+    label(for='firstInput') Fecha de expiracion
     .row
       .col-sm-12
         | @Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })

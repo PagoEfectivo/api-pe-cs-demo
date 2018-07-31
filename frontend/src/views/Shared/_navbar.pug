@@ -1,22 +1,19 @@
-nav.navbar.navbar-expand-lg.navbar-light.bg-light
-  a.navbar-brand(href='#') PagoEfectivo
-//-   button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
-//-     span.navbar-toggler-icon
-//-   #navbarSupportedContent.collapse.navbar-collapse
-//-     ul.navbar-nav.mr-auto
-//-       li.nav-item.active
-//-         a.nav-link(href='#')
-//-           | Home 
-//-           span.sr-only (current)
-//-       li.nav-item
-//-         a.nav-link(href='#') Link
-//-       li.nav-item.dropdown
-//-         a#navbarDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
-//-           | Dropdown
-//-         .dropdown-menu(aria-labelledby='navbarDropdown')
-//-           a.dropdown-item(href='#') Action
-//-           a.dropdown-item(href='#') Another action
-//-           .dropdown-divider
-//-           a.dropdown-item(href='#') Something else here
-//-       li.nav-item
-//-         a.nav-link.disabled(href='#') Disabled
+nav#sidebar
+  .sidebar-header(style='display: flex;')
+    button#sidebarCollapse.btn.btn-outline-warning(type='button')
+      div.menu-icon
+      div.menu-icon
+      div.menu-icon
+    img.logo_desktop(src='http://pagoefectivo.pe/pe/../wp-content/themes/Avada/assets/images/logo_pe.png', width='220', style='width:220px !important;')
+  ul.list-unstyled.components
+    li
+      a.elements(href='/Cips/GenerarCip')
+        span Generar CIP
+    li
+      a.elements(href='/Cips/ConsultarCip') Consultar CIP
+    li
+      a.elements(href='/Cips/EliminarCip') Eliminar CIP
+    li
+      a.elements(href='/Cips/ActualizarCip') Actualizar CIP
+    li
+      a.elements(href='/') Configuración

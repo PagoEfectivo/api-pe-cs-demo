@@ -151,11 +151,21 @@ a {
   }
 }
 
+#sidebarCollapseTitle{
+  display: none;
+}
+
 .header-custom {
   background: #FEC92F;
   min-height: 80px;
   display: flex;
   align-items: center;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding-left: 20px;
 }
 
 .menu-icon {
@@ -174,5 +184,9 @@ a {
   }
   #sidebarCollapse span {
     display: none;
+  }
+
+  #sidebarCollapseTitle{
+    display: block;
   }
 }

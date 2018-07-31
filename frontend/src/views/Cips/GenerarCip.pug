@@ -4,7 +4,7 @@
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
 | }
 .header-custom
-  button#sidebarCollapse.btn.btn-outline-warning(type='button')
+  button#sidebarCollapseTitle.btn.btn-outline-warning(type='button')
     .menu-icon
     .menu-icon
     .menu-icon
@@ -28,6 +28,64 @@
   .form-group
     label(for='UserEmail') Correo de usuario:
     | @Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
+  .form-check
+    label.form-check-label
+      input.form-check-input(type='checkbox' onchange='availableOptional(this)')
+      | Habilitar campos opcionales
+  br
+  .optional-fields(hidden='')
+    .form-group
+      label(for='firstInput') Fecha de expiracion
+      .row
+        .col-sm-12
+          | @Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })
+        script(type='text/javascript').
+          $(function () {
+          $('#datetimepicker').datetimepicker({
+                  locale: 'pt',
+                  format: 'YYYY-MM-DDThh:mm:ssZ',
+              });
+          });
+    .form-group
+      label(for='AdminEmail') Correo administrador:
+      | @Html.TextBoxFor(m => m.AdminEmail, new { @id = "AdminEmail", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='PaymentConcept') Concepto de pago:
+      | @Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='AdditionalData') informacion adicional:
+      | @Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserName') Nombre de usuario:
+      | @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserLastName') Apellidos de usuario:
+      | @Html.TextBoxFor(m => m.UserLastName, new { @id = "UserLastName", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserUbigeo') Ubigeo de usuario:
+      | @Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserCountry') Pais de usuario:
+      | @Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserDocumentType') Tipo de documento de usuario:
+      | @Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
+      | {
+      | new SelectListItem() {Text = "DNI", Value="DNI"},
+      | new SelectListItem() {Text = "PAS", Value="PAS"},
+      | new SelectListItem() {Text = "LMI", Value="LMI"},
+      | new SelectListItem() {Text = "PAR", Value="PAR"},
+      | new SelectListItem() {Text = "NAN", Value="NAN"}
+      | }, new { @id = "Amount", @class = "form-control"})
+    .form-group
+      label(for='UserDocumentNumber') Nombre de documento de usuario:
+      | @Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserPhone') Numero de usuario:
+      | @Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
+    .form-group
+      label(for='UserCodeCountry') Codigo de pais de usuario:
+      | @Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
   | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
@@ -56,7 +114,15 @@
   |     }
 script.
   $(document).ready(function () {
-  $('#idService').val(getCookie('serviceId'));
-  $('#accessKey').val(getCookie('accessKey'));
-  $('#secretKey').val(getCookie('secretKey'));
+    $('#idService').val(getCookie('serviceId'));
+    $('#accessKey').val(getCookie('accessKey'));
+    $('#secretKey').val(getCookie('secretKey'));
   })
+  function availableOptional(checkboxElem){
+    console.log(checkboxElem.checked)
+    if (checkboxElem.checked) {
+      $('.optional-fields').removeAttr('hidden');
+    } else {
+      $('.optional-fields').attr('hidden', 'true');
+    }
+  }

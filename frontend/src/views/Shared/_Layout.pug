@@ -16,31 +16,9 @@ html(lang='en')
       script(src='~/lib/jquery/dist/jquery.min.js')
   body
     .wrapper
-      nav#sidebar
-        .sidebar-header
-          img.logo_desktop(src='http://pagoefectivo.pe/pe/../wp-content/themes/Avada/assets/images/logo_pe.png', width='220', style='width:220px !important;')
-        ul.list-unstyled.components
-          p Servicios
-          li
-            a.elements(href='/Cips/GenerarCip')
-              span Generar CIP
-          li
-            a.elements(href='/Cips/ConsultarCip') Consultar CIP
-          li
-            a.elements(href='/Cips/EliminarCip') Eliminar CIP
-          li
-            a.elements(href='/Cips/ActualizarCip') Actualizar CIP
-          li
-            a.elements(href='/') Configuración
-          //- li.active
-          //-   a.dropdown-toggle(href='#homeSubmenu', data-toggle='collapse', aria-expanded='false') Home
-          //-   ul#homeSubmenu.collapse.list-unstyled
-          //-     li
-          //-       a(href='#') Home 1
-          //-     li
-          //-       a(href='#') Home 2
-          //-     li
-          //-       a(href='#') Home 3
+      | @{
+      | Html.RenderPartial("_navbar");
+      | }
       #content
         | @RenderBody()
     environment(names='Development')
@@ -60,6 +38,11 @@ html(lang='en')
         $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
+                $('#sidebarCollapseTitle').show()
+            });
+            $('#sidebarCollapseTitle').on('click', function () {
+                $('#sidebar').toggleClass('active');
+                $('#sidebarCollapseTitle').hide();
             });
         });
         function getCookie(name) {
