@@ -123,12 +123,14 @@ a.article {
   background: #FEC92F;
   min-height: 80px;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  margin: 0 auto;
+  text-align: center; }
 
 .header-title {
   font-size: 18px;
   font-weight: bold;
-  padding-left: 20px; }
+  padding: 25px; }
 
 .menu-icon {
   width: 30px;
