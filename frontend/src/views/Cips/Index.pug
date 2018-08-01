@@ -11,7 +11,7 @@ div.header-custom
     div.menu-icon
     div.menu-icon
   span.header-title
-    | Configuracion CIP
+    | CONFIGURACION CIP
 div.content-main               
   .row
       .col-sm-6
@@ -29,7 +29,7 @@ div.content-main
         .form-group
           label(for='secretKey') Secret key:
           input#secretKey.form-control(type='password')
-  button.btn.btn-default(type='submit', onclick='credentialRegister()') Registrar
+  button.btn.btn-outline-secondary(type='submit', onclick='credentialRegister()') Registrar
   br
 
 script.
@@ -41,4 +41,7 @@ script.
     setCookie("accessKey", accessKey.value);
     setCookie("secretKey", secretKey.value);
   }
+style(type='text/css').
+  @media print { body { -webkit-print-color-adjust: exact; } }
+
 

@@ -8,7 +8,7 @@
     .menu-icon
     .menu-icon
     .menu-icon
-  span.header-title Consultar CIP
+  span.header-title CONSULTAR CIP
 .content-main
   | @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
   | {
@@ -18,7 +18,7 @@
   | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   |         @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   |         @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  button.btn.btn-default(type='submit') Consultar
+  button.btn.btn-outline-secondary(type='submit') Consultar
   | }
   br
   |     @if (@ViewBag.response != null)

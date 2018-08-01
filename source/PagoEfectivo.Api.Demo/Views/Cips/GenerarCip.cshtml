@@ -9,7 +9,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
-  </button><span class="header-title">Generar CIP</span>
+  </button><span class="header-title">GENERAR CIP</span>
 </div>
 <div class="content-main">
   @using (Html.BeginForm("GenerarCip", "Cips", FormMethod.Post))
@@ -44,7 +44,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
           $(function () {
           $('#datetimepicker').datetimepicker({
                   locale: 'pt',
-                  format: 'YYYY-MM-DDThh:mm:ssZ',
+                  format: 'YYYY-MM-DDTHH:mm:ssZ',
               });
           });
         </script>
@@ -93,7 +93,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  <button class="btn btn-default" type="submit">Generar</button>}<br>    @if (@ViewBag.response != null)
+  <button class="btn btn-outline-secondary" type="submit">Generar</button>}<br>    @if (@ViewBag.response != null)
       {
   <div class="card">
     <div class="card-body">

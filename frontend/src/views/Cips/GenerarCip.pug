@@ -8,7 +8,7 @@
     .menu-icon
     .menu-icon
     .menu-icon
-  span.header-title Generar CIP
+  span.header-title GENERAR CIP
 .content-main
   | @using (Html.BeginForm("GenerarCip", "Cips", FormMethod.Post))
   | {
@@ -43,7 +43,7 @@
           $(function () {
           $('#datetimepicker').datetimepicker({
                   locale: 'pt',
-                  format: 'YYYY-MM-DDThh:mm:ssZ',
+                  format: 'YYYY-MM-DDTHH:mm:ssZ',
               });
           });
     .form-group
@@ -89,7 +89,7 @@
   | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  button.btn.btn-default(type='submit') Generar
+  button.btn.btn-outline-secondary(type='submit') Generar
   | }
   br
   |     @if (@ViewBag.response != null)

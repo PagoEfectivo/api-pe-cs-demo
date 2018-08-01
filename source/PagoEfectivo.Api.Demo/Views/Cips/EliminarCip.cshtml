@@ -9,7 +9,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
-  </button><span class="header-title">Eliminar CIP</span>
+  </button><span class="header-title">ELIMINAR CIP</span>
 </div>
 <div class="content-main">
   @using (Html.BeginForm("EliminarCip", "Cips", FormMethod.Post))
@@ -19,7 +19,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
           @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
           @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  <button class="btn btn-default" type="submit">Eliminar</button>}<br>    @if (@ViewBag.response != null)
+  <button class="btn btn-outline-secondary" type="submit">Eliminar</button>}<br>    @if (@ViewBag.response != null)
       {
   <div class="card">
     <div class="card-body">
