@@ -12,7 +12,8 @@ div.header-custom
     div.menu-icon
   span.header-title
     | CONFIGURACI&Oacute;N CIP
-div.content-main               
+div.content-main     
+  #response
   .row
       .col-sm-6
         .form-group
@@ -40,6 +41,22 @@ script.
     setCookie("serviceId", serviceId.value);
     setCookie("accessKey", accessKey.value);
     setCookie("secretKey", secretKey.value);
+    $("#response").animate({
+        height: '+=72px'
+    }, 300);
+  
+    $('<div class="alert alert-success">' +
+      '<button type="button" class="close" data-dismiss="alert">' +
+      '&times;</button>Se ha registrado el acceso</div>').hide().appendTo('#response').fadeIn(1000);
+
+    $(".alert").delay(3000).fadeOut(
+    "normal",
+    function(){
+      $(this).remove();
+    });
+    $("#response").delay(4000).animate({
+        height: '-=72px'
+    }, 300);
   }
 
 
