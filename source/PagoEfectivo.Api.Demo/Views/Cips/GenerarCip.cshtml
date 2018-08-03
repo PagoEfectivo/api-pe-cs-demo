@@ -25,7 +25,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <label for="Amount">Monto:</label>@Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })
   </div>
   <div class="form-group">
-    <label for="TransactionCode">Codigo de transaccion:</label>@Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
+    <label for="TransactionCode">C&oacute;digo de transacci&oacute;n:</label>@Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
   </div>
   <div class="form-group">
     <label for="UserEmail">Correo de usuario:</label>@Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
@@ -37,7 +37,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   </div><br>
   <div class="optional-fields" hidden="">
     <div class="form-group">
-      <label for="firstInput">Fecha de expiracion</label>
+      <label for="firstInput">Fecha de expiraci&oacute;n</label>
       <div class="row">
         <div class="col-sm-12">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
         <script type="text/javascript">
@@ -57,7 +57,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       <label for="PaymentConcept">Concepto de pago:</label>@Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
-      <label for="AdditionalData">informacion adicional:</label>@Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
+      <label for="AdditionalData">Informaci&oacute;n adicional:</label>@Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
       <label for="UserName">Nombre de usuario:</label>@Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })
@@ -69,7 +69,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       <label for="UserUbigeo">Ubigeo de usuario:</label>@Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
-      <label for="UserCountry">Pais de usuario:</label>@Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
+      <label for="UserCountry">Pa&iacute;s de usuario:</label>@Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
       <label for="UserDocumentType">Tipo de documento de usuario:</label>@Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
@@ -82,13 +82,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       }, new { @id = "Amount", @class = "form-control"})
     </div>
     <div class="form-group">
-      <label for="UserDocumentNumber">Nombre de documento de usuario:</label>@Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
+      <label for="UserDocumentNumber">N&uacute;mero de documento de usuario:</label>@Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
-      <label for="UserPhone">Numero de usuario:</label>@Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
+      <label for="UserPhone">Tel&eacute;fono de usuario:</label>@Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
     </div>
     <div class="form-group">
-      <label for="UserCodeCountry">Codigo de pais de usuario:</label>@Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
+      <label for="UserCodeCountry">C&oacute;digo de pa&iacute;s de usuario:</label>@Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
     </div>
   </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
