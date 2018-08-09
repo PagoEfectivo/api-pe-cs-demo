@@ -1,6 +1,5 @@
 include ../_mixins/mixin.pug
-
-
+| @model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
 | @{
 | ViewData["Title"] = "Página de Inicio";
 | Layout = "~/Views/Shared/_Layout.cshtml"; 
@@ -12,51 +11,76 @@ div.header-custom
     div.menu-icon
   span.header-title
     | CONFIGURACI&Oacute;N CIP
-div.content-main     
-  #response
-  .row
-      .col-sm-6
-        .form-group
-          label(for='serviceId') ID de servicio:
-          input#serviceId.form-control(type='text')
-  .row
-      .col-sm-6
-        .form-group
-          label(for='accessKey') Access key:
-          input#accessKey.form-control(type='password')
-  .row
-  
-      .col-sm-6
-        .form-group
-          label(for='secretKey') Secret key:
-          input#secretKey.form-control(type='password')
-  button.btn.btn-outline-secondary(type='submit', onclick='credentialRegister()') Registrar
+.content-main
+  | @using (Html.BeginForm("Index", "Cips", FormMethod.Post))
+  | {
+  .form-group
+    label(for='firstInput') ID de servicio:
+    | @Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })
+  .form-group
+    label(for='firstInput') Access key:
+    | @Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })
+  .form-group
+    label(for='firstInput') Secret key:
+    | @Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })
+  button.btn.btn-outline-secondary(type='submit') Registrar
+  | }
   br
+  |     @if (@ViewBag.response != null)
+  |     {
+  .card
+    .card-body
+      label.font-weight-bold(for='firstInput') Response
+      br
+      .form-group
+        label(for='firstInput') Code:
+        input#status.form-control(type='text', value='@ViewBag.code', readonly='')
+      .form-group
+        label(for='firstInput') Message:
+        input#message.form-control(type='text', value='@ViewBag.status', readonly='')
+      .form-group
+        label(for='firstInput') Data:
+        pre: code#code                                
+  script.
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
+    $('#code').text(str);
+    if(response.code == 100){
+      var serviceId = document.getElementById("serviceId");
+      var accessKey = document.getElementById("accessKey");
+      var secretKey = document.getElementById("secretKey");
+      setCookie("serviceId", serviceId.value);
+      setCookie("accessKey", accessKey.value);
+      setCookie("secretKey", secretKey.value);
+    }
+  |     }
 
-script.
-  function credentialRegister(){
-    var serviceId = document.getElementById("serviceId");
-    var accessKey = document.getElementById("accessKey");
-    var secretKey = document.getElementById("secretKey");
-    setCookie("serviceId", serviceId.value);
-    setCookie("accessKey", accessKey.value);
-    setCookie("secretKey", secretKey.value);
-    $("#response").animate({
-        height: '+=72px'
-    }, 300);
+  //- button.btn.btn-outline-secondary(type='submit', onclick='credentialRegister()') Registrar
+
+//- script.
+//-   function credentialRegister(){
+//-     var serviceId = document.getElementById("serviceId");
+//-     var accessKey = document.getElementById("accessKey");
+//-     var secretKey = document.getElementById("secretKey");
+//-     setCookie("serviceId", serviceId.value);
+//-     setCookie("accessKey", accessKey.value);
+//-     setCookie("secretKey", secretKey.value);
+//-     $("#response").animate({
+//-         height: '+=72px'
+//-     }, 300);
   
-    $('<div class="alert alert-success">' +
-      '<button type="button" class="close" data-dismiss="alert">' +
-      '&times;</button>Se ha registrado el acceso</div>').hide().appendTo('#response').fadeIn(1000);
+//-     $('<div class="alert alert-success">' +
+//-       '<button type="button" class="close" data-dismiss="alert">' +
+//-       '&times;</button>Se ha registrado el acceso</div>').hide().appendTo('#response').fadeIn(1000);
 
-    $(".alert").delay(3000).fadeOut(
-    "normal",
-    function(){
-      $(this).remove();
-    });
-    $("#response").delay(4000).animate({
-        height: '-=72px'
-    }, 300);
-  }
+//-     $(".alert").delay(3000).fadeOut(
+//-     "normal",
+//-     function(){
+//-       $(this).remove();
+//-     });
+//-     $("#response").delay(4000).animate({
+//-         height: '-=72px'
+//-     }, 300);
+//-   }
 
 
