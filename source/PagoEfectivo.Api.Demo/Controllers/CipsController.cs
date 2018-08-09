@@ -15,10 +15,51 @@ namespace PagoEfectivo.Api.Demo.Controllers
     {
         // GET: /<controller>/
 
-        public IActionResult Index()
+        public IActionResult Index(CipViewModel model)
         {
-            ViewData["Message"] = "Bienvenidos a ApiDemo";
-            return View();
+            if (model.Authenticate == null && model.Data == null)
+                return View();
+            else
+            {
+                var _url = UrlConfig();
+
+                var date = Convert.ToDateTime(DateTime.Now);
+                var DateNow = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, new TimeSpan(-5, 0, 0));
+
+                Authenticate authorization = new Authenticate()
+                {
+                    accessKey = model.Authenticate.AccessKey,
+                    idService = model.Authenticate.IdService,
+                    dateRequest = DateNow.ToString("yyyy-MM-ddTHH:mm:sszzz")
+                };
+
+                var authRequest = authorization.idService.ToString() + "." + authorization.accessKey + "." + model.Authenticate.SecretKey + "." + authorization.dateRequest;
+
+                authorization.hashString = Hash.HashString(authRequest);
+
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(_url);
+                    string stringData = JsonConvert.SerializeObject(authorization);
+                    var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = client.PostAsync("v1/authorizations", contentData).Result;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                        ViewBag.status = response.StatusCode;
+                        ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                    }
+                    else
+                    {
+                        ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
+                        ViewBag.status = response.StatusCode;
+                        ViewBag.response = response.Content.ReadAsStringAsync().Result;
+                    }
+                }
+
+                return View();
+            }
         }
 
         [Route("Cips/GenerarCip")]
@@ -247,12 +288,7 @@ namespace PagoEfectivo.Api.Demo.Controllers
         {
             try
             {
-                var configBuilder = new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false)
-                    .Build();
-
-                var _url = configBuilder["Url"];
+                var _url = UrlConfig();
 
                 var date = Convert.ToDateTime(DateTime.Now);
                 var DateNow = new DateTimeOffset(date.Year, date.Month, date.Day, date.Hour, date.Minute, date.Second, new TimeSpan(-5, 0, 0));
@@ -290,7 +326,16 @@ namespace PagoEfectivo.Api.Demo.Controllers
                 return e.Message.ToString();
             }
 
+        }
 
+        public string UrlConfig()
+        {
+            var configBuilder = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", false)
+                    .Build();
+
+            return configBuilder["Url"];
         }
 
     }
