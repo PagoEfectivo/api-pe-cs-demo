@@ -15,10 +15,13 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   @using (Html.BeginForm("ConsultarCip", "Cips", FormMethod.Post))
   {
   <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+    <label for="firstInput">Número de CIP:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
-          @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
-          @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
   <button class="btn btn-outline-secondary" type="submit">Consultar</button>}<br>    @if (@ViewBag.response != null)
       {
   <div class="card">

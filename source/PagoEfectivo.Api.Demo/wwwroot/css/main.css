@@ -51,6 +51,7 @@ a {
   #sidebar.active {
     margin-left: -250px; }
   #sidebar .sidebar-header {
+    align-items: center;
     padding: 10px;
     background: #FEC92F; }
   #sidebar ul.components {

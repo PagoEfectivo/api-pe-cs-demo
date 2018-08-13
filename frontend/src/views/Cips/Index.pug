@@ -10,24 +10,30 @@ div.header-custom
     div.menu-icon
     div.menu-icon
   span.header-title
-    | CONFIGURACI&Oacute;N CIP
+    | AUTORIZACI&Oacute;N CIP
 .content-main
   | @using (Html.BeginForm("Index", "Cips", FormMethod.Post))
   | {
   .form-group
     label(for='firstInput') ID de servicio:
-    | @Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })
   .form-group
     label(for='firstInput') Access key:
-    | @Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })
   .form-group
     label(for='firstInput') Secret key:
-    | @Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })
   button.btn.btn-outline-secondary(type='submit') Registrar
   | }
   br
-  |     @if (@ViewBag.response != null)
-  |     {
+  | @if (@ViewBag.response != null)
+  | {
   .card
     .card-body
       label.font-weight-bold(for='firstInput') Response
@@ -53,34 +59,4 @@ div.header-custom
       setCookie("accessKey", accessKey.value);
       setCookie("secretKey", secretKey.value);
     }
-  |     }
-
-  //- button.btn.btn-outline-secondary(type='submit', onclick='credentialRegister()') Registrar
-
-//- script.
-//-   function credentialRegister(){
-//-     var serviceId = document.getElementById("serviceId");
-//-     var accessKey = document.getElementById("accessKey");
-//-     var secretKey = document.getElementById("secretKey");
-//-     setCookie("serviceId", serviceId.value);
-//-     setCookie("accessKey", accessKey.value);
-//-     setCookie("secretKey", secretKey.value);
-//-     $("#response").animate({
-//-         height: '+=72px'
-//-     }, 300);
-  
-//-     $('<div class="alert alert-success">' +
-//-       '<button type="button" class="close" data-dismiss="alert">' +
-//-       '&times;</button>Se ha registrado el acceso</div>').hide().appendTo('#response').fadeIn(1000);
-
-//-     $(".alert").delay(3000).fadeOut(
-//-     "normal",
-//-     function(){
-//-       $(this).remove();
-//-     });
-//-     $("#response").delay(4000).animate({
-//-         height: '-=72px'
-//-     }, 300);
-//-   }
-
-
+  | }
