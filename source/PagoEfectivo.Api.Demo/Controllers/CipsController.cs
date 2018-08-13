@@ -103,11 +103,12 @@ namespace PagoEfectivo.Api.Demo.Controllers
                         string stringData = JsonConvert.SerializeObject(cip);
                         var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, "application/json");
                         HttpResponseMessage response = client.PostAsync("v1/cips", contentData).Result;
-                        var UrlCip = JsonConvert.DeserializeObject<GenerateResponse>(response.Content.ReadAsStringAsync().Result);
+                        
      
 
                         if (response.IsSuccessStatusCode)
                         {
+                            var UrlCip = JsonConvert.DeserializeObject<GenerateResponse>(response.Content.ReadAsStringAsync().Result);
                             ViewBag.code = StatusCode((int)response.StatusCode).StatusCode;
                             ViewBag.status = response.StatusCode;
                             ViewBag.response = response.Content.ReadAsStringAsync().Result;
