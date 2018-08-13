@@ -14,15 +14,17 @@
   | {
   .form-group
     label(for='firstInput') Número de CIP:
-    | @Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
   | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
-  |         @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
-  |         @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
+  | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
+  | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
   button.btn.btn-outline-secondary(type='submit') Eliminar
   | }
   br
-  |     @if (@ViewBag.response != null)
-  |     {
+  | @if (@ViewBag.response != null)
+  | {
   .card
     .card-body
       label.font-weight-bold(for='firstInput') Response
@@ -35,7 +37,7 @@
         input#message.form-control(type='text', value='@ViewBag.status', readonly='')
       .form-group
         label(for='firstInput') Data:
-        pre: code#code                                
+        pre: code#code
   script.
     var response = @(Html.Raw(ViewBag.response));
     var str = JSON.stringify(response, null, 2);

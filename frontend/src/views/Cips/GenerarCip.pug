@@ -14,30 +14,40 @@
   | {
   .form-group
     label(for='Currency') Tipo de moneda
-    | @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>
-    | {
-    | new SelectListItem() {Text = "PEN", Value="PEN"},
-    | new SelectListItem() {Text = "USD", Value="USD"}
-    | }, new { @id = "Amount", @class = "form-control"})
+    .row
+      .col-sm-6
+        | @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>
+        | {
+        | new SelectListItem() {Text = "PEN", Value="PEN"},
+        | new SelectListItem() {Text = "USD", Value="USD"}
+        | }, new { @id = "Amount", @class = "form-control"})
   .form-group
     label(for='Amount') Monto:
-    | @Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })
   .form-group
     label(for='TransactionCode') C&oacute;digo de transacci&oacute;n:
-    | @Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
   .form-group
     label(for='UserEmail') Correo de usuario:
-    | @Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
   .form-check
     label.form-check-label
-      input.form-check-input(type='checkbox' onchange='availableOptional(this)')
-      | Habilitar campos opcionales
+    .row
+      .col-sm-6
+        input.form-check-input(type='checkbox' onchange='availableOptional(this)')
+        | Habilitar campos opcionales
   br
   .optional-fields(hidden='')
     .form-group
       label(for='firstInput') Fecha de expiraci&oacute;n
       .row
-        .col-sm-12
+        .col-sm-6
           | @Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })
         script(type='text/javascript').
           $(function () {
@@ -48,52 +58,74 @@
           });
     .form-group
       label(for='AdminEmail') Correo administrador:
-      | @Html.TextBoxFor(m => m.AdminEmail, new { @id = "AdminEmail", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.AdminEmail, new { @id = "AdminEmail", @class = "form-control", @Value = "" })
     .form-group
       label(for='PaymentConcept') Concepto de pago:
-      | @Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })
     .form-group
       label(for='AdditionalData') Informaci&oacute;n adicional:
-      | @Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserName') Nombre de usuario:
-      | @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserLastName') Apellidos de usuario:
-      | @Html.TextBoxFor(m => m.UserLastName, new { @id = "UserLastName", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserLastName, new { @id = "UserLastName", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserUbigeo') Ubigeo de usuario:
-      | @Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserCountry') Pa&iacute;s de usuario:
-      | @Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserDocumentType') Tipo de documento de usuario:
-      | @Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
-      | {
-      | new SelectListItem() {Text = "DNI", Value="DNI"},
-      | new SelectListItem() {Text = "PAS", Value="PAS"},
-      | new SelectListItem() {Text = "LMI", Value="LMI"},
-      | new SelectListItem() {Text = "PAR", Value="PAR"},
-      | new SelectListItem() {Text = "NAN", Value="NAN"}
-      | }, new { @id = "Amount", @class = "form-control"})
+      .row
+        .col-sm-6
+          | @Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
+          | {
+          | new SelectListItem() {Text = "DNI", Value="DNI"},
+          | new SelectListItem() {Text = "PAS", Value="PAS"},
+          | new SelectListItem() {Text = "LMI", Value="LMI"},
+          | new SelectListItem() {Text = "PAR", Value="PAR"},
+          | new SelectListItem() {Text = "NAN", Value="NAN"}
+          | }, new { @id = "Amount", @class = "form-control"})
     .form-group
       label(for='UserDocumentNumber') N&uacute;mero de documento de usuario:
-      | @Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserPhone') Tel&eacute;fono de usuario:
-      | @Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
     .form-group
       label(for='UserCodeCountry') C&oacute;digo de pa&iacute;s de usuario:
-      | @Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
+      .row
+        .col-sm-6
+          | @Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
   | @Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   | @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   | @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
   button.btn.btn-outline-secondary(type='submit') Generar
   | }
   br
-  |     @if (@ViewBag.response != null)
-  |     {
+  | @if (@ViewBag.response != null)
+  | {
   .card
     .card-body
       label.font-weight-bold(for='firstInput') Response
@@ -104,10 +136,13 @@
       .form-group
         label(for='firstInput') Message:
         input#message.form-control(type='text', value='@ViewBag.status', readonly='')
+      | @if (@ViewBag.Url != null)
+      | {
       .form-group
         label(for='firstInput') URL:
         a.form-control.content-link(href='@ViewBag.Url', readonly='', target='_blank') 
           | @ViewBag.Url
+      | }
       .form-group
         label(for='firstInput') Data:
         pre: code#code                                
@@ -115,7 +150,7 @@
     var response = @(Html.Raw(ViewBag.response));
     var str = JSON.stringify(response, null, 2);
     $('#code').text(str);
-  |     }
+  | }
 script.
   $(document).ready(function () {
     $('#idService').val(getCookie('serviceId'));

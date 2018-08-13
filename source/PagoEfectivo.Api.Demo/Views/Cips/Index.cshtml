@@ -8,22 +8,31 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
     <div class="menu-icon"></div>
-  </button><span class="header-title">CONFIGURACI&Oacute;N CIP</span>
+  </button><span class="header-title">AUTORIZACI&Oacute;N CIP</span>
 </div>
 <div class="content-main">
   @using (Html.BeginForm("Index", "Cips", FormMethod.Post))
   {
   <div class="form-group">
-    <label for="firstInput">ID de servicio:</label>@Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })
+    <label for="firstInput">ID de servicio:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="firstInput">Access key:</label>@Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })
+    <label for="firstInput">Access key:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="firstInput">Secret key:</label>@Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })
+    <label for="firstInput">Secret key:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })</div>
+    </div>
   </div>
-  <button class="btn btn-outline-secondary" type="submit">Registrar</button>}<br>    @if (@ViewBag.response != null)
-      {
+  <button class="btn btn-outline-secondary" type="submit">Registrar</button>}<br>@if (@ViewBag.response != null)
+  {
   <div class="card">
     <div class="card-body">
       <label class="font-weight-bold" for="firstInput">Response</label><br>
@@ -53,5 +62,5 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       setCookie("accessKey", accessKey.value);
       setCookie("secretKey", secretKey.value);
     }
-  </script>    }
+  </script>}
 </div>

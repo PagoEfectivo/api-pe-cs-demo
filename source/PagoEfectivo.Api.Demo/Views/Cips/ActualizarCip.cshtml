@@ -15,15 +15,18 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   @using (Html.BeginForm("ActualizarCip", "Cips", FormMethod.Post))
   {
   <div class="form-group">
-    <label for="firstInput">Número de CIP:</label>@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })
+    <label for="firstInput">Número de CIP:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Data[0].Cip, new { @id = "cip", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>
   <div class="form-group">
     <label for="firstInput">Fecha de expiraci&oacute;n</label>
     <div class="row">
-      <div class="col-sm-12">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
       <script type="text/javascript">
         $(function () {
-         $('#datetimepicker').datetimepicker({
+        $('#datetimepicker').datetimepicker({
                 locale: 'pt',
                 format: 'YYYY-MM-DDTHH:mm:ssZ',
             });

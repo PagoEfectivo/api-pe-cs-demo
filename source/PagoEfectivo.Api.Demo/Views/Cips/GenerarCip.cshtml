@@ -15,31 +15,48 @@ Layout = "~/Views/Shared/_Layout.cshtml";
   @using (Html.BeginForm("GenerarCip", "Cips", FormMethod.Post))
   {
   <div class="form-group">
-    <label for="Currency">Tipo de moneda</label>@Html.DropDownListFor(m => m.Currency, new List<SelectListItem>
-    {
-    new SelectListItem() {Text = "PEN", Value="PEN"},
-    new SelectListItem() {Text = "USD", Value="USD"}
-    }, new { @id = "Amount", @class = "form-control"})
+    <label for="Currency">Tipo de moneda</label>
+    <div class="row">
+      <div class="col-sm-6">
+        @Html.DropDownListFor(m => m.Currency, new List<SelectListItem>
+        {
+        new SelectListItem() {Text = "PEN", Value="PEN"},
+        new SelectListItem() {Text = "USD", Value="USD"}
+        }, new { @id = "Amount", @class = "form-control"})
+      </div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="Amount">Monto:</label>@Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })
+    <label for="Amount">Monto:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.Amount, new { @id = "Amount", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="TransactionCode">C&oacute;digo de transacci&oacute;n:</label>@Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })
+    <label for="TransactionCode">C&oacute;digo de transacci&oacute;n:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.TransactionCode, new { @id = "TransactionCode", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>
   <div class="form-group">
-    <label for="UserEmail">Correo de usuario:</label>@Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })
+    <label for="UserEmail">Correo de usuario:</label>
+    <div class="row">
+      <div class="col-sm-6">@Html.TextBoxFor(m => m.UserEmail, new { @id = "UserEmail", @class = "form-control", @Value = "" })</div>
+    </div>
   </div>
   <div class="form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox" onchange="availableOptional(this)">Habilitar campos opcionales
-    </label>
+    <label class="form-check-label"></label>
+    <div class="row">
+      <div class="col-sm-6">
+        <input class="form-check-input" type="checkbox" onchange="availableOptional(this)">Habilitar campos opcionales
+      </div>
+    </div>
   </div><br>
   <div class="optional-fields" hidden="">
     <div class="form-group">
       <label for="firstInput">Fecha de expiraci&oacute;n</label>
       <div class="row">
-        <div class="col-sm-12">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.DateExpiry, new { @id = "datetimepicker", @class = "form-control datetimepicker-input", data_toggle = "datetimepicker", data_target = "#datetimepicker" })</div>
         <script type="text/javascript">
           $(function () {
           $('#datetimepicker').datetimepicker({
@@ -51,50 +68,85 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       </div>
     </div>
     <div class="form-group">
-      <label for="AdminEmail">Correo administrador:</label>@Html.TextBoxFor(m => m.AdminEmail, new { @id = "AdminEmail", @class = "form-control", @Value = "" })
+      <label for="AdminEmail">Correo administrador:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.AdminEmail, new { @id = "AdminEmail", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="PaymentConcept">Concepto de pago:</label>@Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })
+      <label for="PaymentConcept">Concepto de pago:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.PaymentConcept, new { @id = "PaymentConcept", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="AdditionalData">Informaci&oacute;n adicional:</label>@Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })
+      <label for="AdditionalData">Informaci&oacute;n adicional:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.AdditionalData, new { @id = "AdditionalData", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserName">Nombre de usuario:</label>@Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })
+      <label for="UserName">Nombre de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserName, new { @id = "UserName", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserLastName">Apellidos de usuario:</label>@Html.TextBoxFor(m => m.UserLastName, new { @id = "UserLastName", @class = "form-control", @Value = "" })
+      <label for="UserLastName">Apellidos de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserLastName, new { @id = "UserLastName", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserUbigeo">Ubigeo de usuario:</label>@Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })
+      <label for="UserUbigeo">Ubigeo de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserUbigeo, new { @id = "UserUbigeo", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserCountry">Pa&iacute;s de usuario:</label>@Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })
+      <label for="UserCountry">Pa&iacute;s de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserCountry, new { @id = "UserCountry", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserDocumentType">Tipo de documento de usuario:</label>@Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
-      {
-      new SelectListItem() {Text = "DNI", Value="DNI"},
-      new SelectListItem() {Text = "PAS", Value="PAS"},
-      new SelectListItem() {Text = "LMI", Value="LMI"},
-      new SelectListItem() {Text = "PAR", Value="PAR"},
-      new SelectListItem() {Text = "NAN", Value="NAN"}
-      }, new { @id = "Amount", @class = "form-control"})
+      <label for="UserDocumentType">Tipo de documento de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">
+          @Html.DropDownListFor(m => m.UserDocumentType, new List<SelectListItem>
+          {
+          new SelectListItem() {Text = "DNI", Value="DNI"},
+          new SelectListItem() {Text = "PAS", Value="PAS"},
+          new SelectListItem() {Text = "LMI", Value="LMI"},
+          new SelectListItem() {Text = "PAR", Value="PAR"},
+          new SelectListItem() {Text = "NAN", Value="NAN"}
+          }, new { @id = "Amount", @class = "form-control"})
+        </div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserDocumentNumber">N&uacute;mero de documento de usuario:</label>@Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })
+      <label for="UserDocumentNumber">N&uacute;mero de documento de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserDocumentNumber, new { @id = "UserDocumentNumber", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserPhone">Tel&eacute;fono de usuario:</label>@Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })
+      <label for="UserPhone">Tel&eacute;fono de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserPhone, new { @id = "UserPhone", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
     <div class="form-group">
-      <label for="UserCodeCountry">C&oacute;digo de pa&iacute;s de usuario:</label>@Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })
+      <label for="UserCodeCountry">C&oacute;digo de pa&iacute;s de usuario:</label>
+      <div class="row">
+        <div class="col-sm-6">@Html.TextBoxFor(m => m.UserCodeCountry, new { @id = "UserCodeCountry", @class = "form-control", @Value = "" })</div>
+      </div>
     </div>
   </div>@Html.HiddenFor(m => m.Authenticate.IdService, new { @id = "idService" })
   @Html.HiddenFor(m => m.Authenticate.AccessKey, new { @id = "accessKey" })
   @Html.HiddenFor(m => m.Authenticate.SecretKey, new { @id = "secretKey" })
-  <button class="btn btn-outline-secondary" type="submit">Generar</button>}<br>    @if (@ViewBag.response != null)
-      {
+  <button class="btn btn-outline-secondary" type="submit">Generar</button>}<br>@if (@ViewBag.response != null)
+  {
   <div class="card">
     <div class="card-body">
       <label class="font-weight-bold" for="firstInput">Response</label><br>
@@ -105,11 +157,12 @@ Layout = "~/Views/Shared/_Layout.cshtml";
       <div class="form-group">
         <label for="firstInput">Message:</label>
         <input class="form-control" id="message" type="text" value="@ViewBag.status" readonly="">
-      </div>
+      </div>@if (@ViewBag.Url != null)
+      {
       <div class="form-group">
         <label for="firstInput">URL:</label><a class="form-control content-link" href="@ViewBag.Url" readonly="" target="_blank">
            @ViewBag.Url</a>
-      </div>
+      </div>}
       <div class="form-group">
         <label for="firstInput">Data:</label>
         <pre><code id="code">                               </code></pre>
@@ -120,7 +173,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
     var response = @(Html.Raw(ViewBag.response));
     var str = JSON.stringify(response, null, 2);
     $('#code').text(str);
-  </script>    }
+  </script>}
 </div>
 <script>
   $(document).ready(function () {
