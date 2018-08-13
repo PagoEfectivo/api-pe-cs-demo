@@ -138,6 +138,13 @@ a.article {
   background-color: black;
   margin: 4px 0; }
 
+.content-link {
+  text-decoration: underline;
+  color: #0056b3; }
+  .content-link:hover {
+    color: #0056b3;
+    text-decoration: underline; }
+
 @media (max-width: 768px) {
   #sidebar {
     margin-left: -250px; }
