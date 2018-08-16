@@ -1,0 +1,62 @@
+include ../_mixins/mixin.pug
+| @model PagoEfectivo.Api.Demo.Models.Entity.CipViewModel;
+| @{
+| ViewData["Title"] = "Página de Inicio";
+| Layout = "~/Views/Shared/_Layout.cshtml"; 
+| }
+div.header-custom
+  button#sidebarCollapseTitle.btn.btn-outline-warning(type='button')
+    div.menu-icon
+    div.menu-icon
+    div.menu-icon
+  span.header-title
+    | AUTORIZACI&Oacute;N
+.content-main
+  | @using (Html.BeginForm("Index", "Cips", FormMethod.Post))
+  | {
+  .form-group
+    label(for='firstInput') ID de servicio:
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.IdService, new { @id = "serviceId", @class = "form-control", @Value = "" })
+  .form-group
+    label(for='firstInput') Access key:
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.AccessKey, new { @id = "accessKey", @class = "form-control", @Value = "", @type = "password"  })
+  .form-group
+    label(for='firstInput') Secret key:
+    .row
+      .col-sm-6
+        | @Html.TextBoxFor(m => m.Authenticate.SecretKey, new { @id = "secretKey", @class = "form-control", @Value = "", @type = "password"  })
+  button.btn.btn-outline-secondary(type='submit') Registrar
+  | }
+  br
+  | @if (@ViewBag.response != null)
+  | {
+  .card
+    .card-body
+      label.font-weight-bold(for='firstInput') Response
+      br
+      .form-group
+        label(for='firstInput') Code:
+        input#status.form-control(type='text', value='@ViewBag.code', readonly='')
+      .form-group
+        label(for='firstInput') Message:
+        input#message.form-control(type='text', value='@ViewBag.status', readonly='')
+      .form-group
+        label(for='firstInput') Data:
+        pre: code#code                                
+  script.
+    var response = @(Html.Raw(ViewBag.response));
+    var str = JSON.stringify(response, null, 2);
+    $('#code').text(str);
+    if(response.code == 100){
+      var serviceId = document.getElementById("serviceId");
+      var accessKey = document.getElementById("accessKey");
+      var secretKey = document.getElementById("secretKey");
+      setCookie("serviceId", serviceId.value);
+      setCookie("accessKey", accessKey.value);
+      setCookie("secretKey", secretKey.value);
+    }
+  | }
